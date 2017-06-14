@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--select id값은 유니크 해야하는데, list <이런식으로 같을수가 있다. 이럴때 namespace로 구분한다 -->
+<mapper namespace="BookDAO">
+	<!--type:"패키지명.클래스명" // board-mapper에서 패키지명.클래스명을 board로 사용한다고 선언해서 이런식으로 
+		작성함. -->
+	<!-- resultMap은 결과를 매핑하는것이다. 쿼리 결과가 조인구문을 포함할때는 검색 결과를 하나의 자바객체로 매핑할 수 없다. 
+		이럴때 매핑해줘야함 -->
+
+<resultMap id="bookResult" type="book">
+		<id property="bookNum" column="BOOK_NUM" />
+		<result property="parentNum" column="PARENT_NUM" />
+		<result property="bookTitle" column="BOOK_TITLE" />
+		<result property="bookWriter" column="BOOK_WRITER" />
+		<result property="bookPublisher" column="BOOK_PUBLISHER" />
+		<result property="bookprice" column="BOOK_PRICE"/>
+		<result property="bookRent" column="BOOK_RENT"/>
+		<result property="bookPublishDate" column="BOOK_PUBLISH_DATE"/>
+		<result property="bookImage" column="BOOK_IMAGE"/>
+		<result property="bookAttactment" column="BOOK_ATTACTMENT"/>
+		<result property="bookContents" column="BOOK_CONTENTS"/>
+		<result property="bookAgeLimit" column="BOOK_AGE_LIMIT"/>
+	</resultMap> 
+	
+	<insert id="insertBook" parameterType="book"> <!-- 부모책 추가 -->
+        <selectKey keyProperty="bookNum" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(BOOK_NUM), 0) + 1 FROM BOOK
+		</selectKey>  
+        INSERT INTO BOOK(BOOK_NUM, PARENT_NUM, BOOK_TITLE, BOOK_WRITER, BOOK_PUBLISHER,
+        				  BOOK_PRICE,BOOK_RENT,BOOK_PUBLISH_DATE,BOOK_IMAGE,BOOK_ATTACTMENT,BOOK_CONTENTS,
+        				  BOOK_AGE_LIMIT)  
+        VALUES(#{bookNum}, #{parentNum},#{bookTitle},#{bookWriter},
+        			#{bookPublisher},#{bookprice},#{bookRent},#{bookPublishDate},#{bookImage},#{bookAttactment}
+        				,#{bookContents},#{bookAgeLimit})
+       
+
+
+	</insert>
+	<select id="selectParent" resultType="map">
+
+		
+		FROM BOOK
+
+	</select>
+
+
+	<select id="bookView" resultMap="bookResult">
+        <![CDATA[
+          SELECT B.BOOK_NUM, B.PARENT_NUM, B.BOOK_TITLE, B.BOOK_WRITER, B.BOOK_PUBLISHER,
+		B.BOOK_PRICE,B.BOOK_RENT,B.BOOK_PUBLISH_DATE,B.BOOK_IMAGE,B.BOOK_ATTACTMENT,B.BOOK_CONTENTS,
+		B.BOOK_AGE_LIMIT,(select listagg(g.code_contents,',') WITHIN GROUP (ORDER BY g.code_contents) from genre g, genre2 e  where g.code_num=e.CODE_CONTENTS and e.BOOK_NUM = B.book_num) CODE_CONTENTS,
+    	(select listagg(g.code_contents,',') WITHIN GROUP (ORDER BY g.code_contents) from genre g, genre2 e  where g.code_num=e.CODE_CONTENTS2 and e.BOOK_NUM = B.book_num) CODE_CONTENTS2
+   		FROM BOOK B
+  		WHERE B.BOOK_NUM = ${bookNum}
+        ]]>
+	</select>
+	
+	<select id="getBookList" resultType="map">
+		SELECT *
+		FROM 	BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		and CODE_CONTENTS2=#{codeContents}
+	</select>
+		<select id="getBookList2" resultType="map">
+		SELECT *
+		FROM 	BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		and CODE_CONTENTS2=#{codeContents}
+		order by book_hit desc
+	</select>
+	<select id="getBookList3" resultType="map">
+		SELECT *
+		FROM 	BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		and CODE_CONTENTS2=#{codeContents}
+		and to_char(b.BOOK_PUBLISH_DATE,'YYYYMMDD') > to_char(add_months(sysdate,-6),'YYYYMMDD')
+		order by book_hit desc
+	</select>
+	<select id="getBookList4" resultType="map">
+		SELECT *
+		FROM 	BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		and CODE_CONTENTS2=#{codeContents}
+		and b.BOOK_PRICE = 0 
+		OR b.BOOK_RENT = 0
+		order by book_hit desc
+	</select>
+		<select id="codetitle" resultMap="bookResult">
+        <![CDATA[
+        SELECT CODE_CONTENTS
+        FROM GENRE
+        WHERE CODE_NUM = TO_NUMBER('${codeContents}','9999')  
+        ]]>
+	</select>
+</mapper>
+
+ 
