@@ -5,10 +5,11 @@
 <html>
 <head>
 <title>Insert title here</title>
+<link rel="stylesheet" href="./scripts/jquery-ui.min.css">
 <script src="./scripts/jquery-3.1.1.min.js"></script>
 
 
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="./scripts/jquery-ui.min.js"></script>
 
 <style>
 .table {
@@ -93,17 +94,17 @@ tr:nth-child(2n) .tddd {
 
 		});
 	})
-
 	$(function() {
-
-		$("#btn").click(function(event) {
+		$("#btn3").click(function(event) {
 			event.preventDefault();
-			
-			$("#list").append("<div>");
-			$("#list").append($(".select").first().clone());
-			$("#list").append("</div>");
+			$("#list2").append("<div>");
+			$("#list2 option:last").remove();
+			$("#list2").append("</div>");
 
 		});
+	})
+
+	$(function() {
 
 		$("#list").on("change", ".select1", getList);
 
@@ -114,7 +115,7 @@ tr:nth-child(2n) .tddd {
 		var se = $(this).next();
 		console.log(se);
 		$.getJSON("genrelist.do?codelist=" + $(this).val(), function(data) {
-						
+
 			se.empty();
 			for (i = 0; i < data.length; i++) {
 				var option = $("<option value='"+data[i].CODE_NUM+"'>"
@@ -128,71 +129,138 @@ tr:nth-child(2n) .tddd {
 
 </head>
 <body>
+	<script>
+	
+	var dialog, form
+	  $( function() {
+		    
+	
+ 	 dialog = $( "#dialog-form" ).dialog({
+    autoOpen: false,
+    height: 400,
+    width: 350,
+    modal: false,
+    buttons: {
+      /* "Create an account": addUser, */
+      Cancel: function() {
+        dialog.dialog( "close" );
+      }
+    },
+    close: function() {
+      form[ 0 ].reset();
+     
+    }
+  });
 
+  form = dialog.find( "form" ).on( "submit", function( event ) {
+    event.preventDefault();
+    addUser();
+  });
+
+ 	 $( "#btn" ).button().on( "click", function() {
+ 	   dialog.dialog( "open" );
+  });
+});  
+</script>
+	<div id="dialog-form" title="Create new user">
+		<p class="validateTips">All form fields are required.</p>
+
+		<form>
+			<fieldset>
+				<label for="name">분야</label> 
+				<div>
+								<span class="select"> <select class="select1"
+									id="sel1_${st.count}" name="codecontent"
+									style="width: 150px; height: 35px;">
+										<!-- 1 -->
+										<option value="" selected>분야 선택</option>
+										<c:forEach items="${genre1}" var="genre">
+											<option value="${genre.CODE_NUM }">${genre.CODE_CONTENTS}</option>
+										</c:forEach>
+								</select> <select class="select2" id="sel2_${st.count}"
+									name="codecontent2" style="width: 150px; height: 35px;">
+										<!-- 1 -->
+										<option value="" selected>장르 선택</option>
+								</select>
+								<button>삭제</button>
+								</span>
+							</div>
+				<input type="submit" tabindex="-1"
+					style="position: absolute; top: -1000px">
+			</fieldset>
+		</form>
+	</div>
 	<div class="insert">
 		<h2 style="font-size: 30px;">도서 수정</h2>
 	</div>
 	<br>
 	<br>
-	<form action="bookUpdate.do" method="post"
-		enctype="multipart/form-data">
+	<b style="color: white; font-size: 20px;">분야 수정</b>
+	<div style="width: 1200px; border: 1px solid white;">
+		<table style="width: 1100px; margin: 30px;">
 
-		<table style="width: 1100px; height: 900px;">
+
 			<tr>
 
 				<td class="tdd">분야 선택</td>
-				<td class="tddd"><span id="list"> 
-							<c:forEach items="${genre2}" var="genre3" varStatus="st">
-								<div>
-								<span class="select">
-								<select class="select1" id="sel1_${st.count}" name="codecontent"
+				<td class="tddd"><span id="list"> <c:forEach
+							items="${genre2}" var="genre3" varStatus="st">
+							<div>
+								<span class="select"> <select class="select1"
+									id="sel1_${st.count}" name="codecontent"
 									style="width: 150px; height: 35px;">
-									<!-- 1 -->
-									<option value="" selected>분야 선택</option>
-									<c:forEach items="${genre1}" var="genre">
-										<option value="${genre.CODE_NUM }">${genre.CODE_CONTENTS}</option>
-									</c:forEach>
-								</select>
-						
-							
-							
-								<select class="select2" id="sel2_${st.count}" name="codecontent2"
-									style="width: 150px; height: 35px;">
-									<!-- 1 -->
-									<option value="" selected>장르 선택</option>
-								</select>
-									</span>
-								</div>
-								
-								<!-- 옵션 태그 값 불러오기 --> 
-								<script>
-								$("#sel1_${st.count}").val("${genre3.CODE_CONTENTS }");
-								
-								$.getJSON("genrelist.do?codelist=${genre3.CODE_CONTENTS }", function(data) {
-									var se = $("#sel2_${st.count}");
-									se.empty();
-									for (i = 0; i < data.length; i++) {
-										var option = $("<option value='"+data[i].CODE_NUM+"'>"
-												+ data[i].CODE_CONTENTS + "</option>");
-										se.append(option);
-									}
-									se.val("${genre3.CODE_CONTENTS2 }"); 
-								})
-							
-			
-			
-									</script>
+										<!-- 1 -->
+										<option value="" selected>분야 선택</option>
+										<c:forEach items="${genre1}" var="genre">
+											<option value="${genre.CODE_NUM }">${genre.CODE_CONTENTS}</option>
 										</c:forEach>
-										
-					</span>
-					
-			
+								</select> <select class="select2" id="sel2_${st.count}"
+									name="codecontent2" style="width: 150px; height: 35px;">
+										<!-- 1 -->
+										<option value="" selected>장르 선택</option>
+								</select>
+								<button>삭제</button>
+								</span>
+							</div>
+
+							<!-- 옵션 태그 값 불러오기 -->
+							<script>
+									$("#sel1_${st.count}").val(
+											"${genre3.CODE_CONTENTS }");
+
+									$
+											.getJSON(
+													"genrelist.do?codelist=${genre3.CODE_CONTENTS }",
+													function(data) {
+														var se = $("#sel2_${st.count}");
+														se.empty();
+														for (i = 0; i < data.length; i++) {
+															var option = $("<option value='"+data[i].CODE_NUM+"'>"
+																	+ data[i].CODE_CONTENTS
+																	+ "</option>");
+															se.append(option);
+														}
+														se
+																.val("${genre3.CODE_CONTENTS2 }");
+													})
+								</script>
+						</c:forEach>
+
+				</span>
+
+
 					<button id="btn" class="button1">
-						<span>복수 등록</span>
+						<span>추가</span>
 					</button></td>
 
 			</tr>
-			
+		</table>
+	</div>
+	<br>
+	<br>
+	<b style="color: white; font-size: 20px;">도서 수정</b>
+	<div style="width: 1200px; border: 1px solid white;">
+		<table style="width: 1100px; margin: 30px;">
 			<tr>
 				<td class="tdd">도서명</td>
 				<td class="tddd"><input type="text" name="bookTitle"
@@ -225,24 +293,22 @@ tr:nth-child(2n) .tddd {
 						<option value="15">15세</option>
 						<option value="19">19세</option>
 				</select></td>
-				
+
 			</tr>
-			<script>  
-			
-			$("#selectBox").val("${book.bookAgeLimit}");
-			
-			
-			
-			</script>
+			<script>
+					$("#selectBox").val("${book.bookAgeLimit}");
+				</script>
 			<tr>
 				<td class="tdd">도서 파일</td>
 				<td class="tddd"><input type="file" name="uploadFile"
-					value="${book.bookAttactment }"></td>
+					value="${book.bookAttactment }">
+					<button>삭제</button></td>
 			</tr>
 			<tr>
 				<td class="tdd">타이틀 이미지</td>
 				<td class="tddd"><input type="file" name="imageFile"
-					value="${book.bookImage}"></td>
+					value="${book.bookImage}">
+					<button>삭제</button></td>
 			</tr>
 			<tr>
 				<td class="tdd" rowspan="2">가격</td>
@@ -262,30 +328,38 @@ tr:nth-child(2n) .tddd {
 
 
 			</tr>
-
+		</table>
+	</div>
+	<br>
+	<br>
+	<br>
+	<b style="color: white; font-size: 20px;">시리즈 수정</b>
+	<div style="width: 1200px; border: 1px solid white;">
+		<table style="width: 1100px; margin: 30px;">
 			<tr>
 				<td class="tdd">시리즈 등록</td>
 
 
 
-				<td class="tddd">
-				<c:forEach items="${serise}" var="serise1" >
-				<span id="list2"> 
-					<span class="table2">		
-							도서명 : <input type="text" name="titleserise" value="${serise1.BOOK_TITLE }"  style="height: 25px;">
-
-							출판 날짜 : <input type="date" name="dateserise" value="${serise1.BOOK_PUBLISH_DATE }"
-							style="height: 25px;"> 도서 파일 : <input type="file"
-							name="fileserise" value="${serise1.BOOK_ATTACTMENT }">
-					</span>
-				</span>
-				</c:forEach>
+				<td class="tddd"><c:forEach items="${serise}" var="serise1">
+						<span id="list2"> <span class="table2"> 도서명 : <input
+								type="text" name="titleserise" value="${serise1.BOOK_TITLE }"
+								style="height: 25px;"> 출판 날짜 : <input type="date"
+								name="dateserise" value="${serise1.BOOK_PUBLISH_DATE }"
+								style="height: 25px;"> 도서 파일 : <input type="file"
+								name="fileserise" value="${serise1.BOOK_ATTACTMENT }">
+						</span>
+						</span>
+					</c:forEach>
 					<button id="btn2" class="button1">
 						<span>시리즈 등록</span>
-					</button></td>
+					</button>
+					<button id="btn3">삭제</button></td>
 			</tr>
 		</table>
-		<input type="submit" value="도서 수정" class="button1" />
-	</form>
+	</div>
+	<input type="submit" value="도서 수정" class="button1" />
+
+
 </body>
 </html>
