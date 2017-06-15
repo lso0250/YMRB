@@ -55,6 +55,17 @@
 		});
 	});
 </script>
+<script type="text/javascript">
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+</script>
 <style>
 #floatMenu {
 	color: white;
@@ -218,9 +229,11 @@ body {
 					<span class="drag-pointer">&nbsp;</span>
 					<!-- photo cover -->
 					<div class="photo-cover">
-						<a href="css/images/golden-gate-big.jpg" class="big-image"><img
+						<a data-toggle="modal" data-target="#modal-testNew" role="button" data-backdrop="static" href="bookView.do?bookNum=${alstn2.BOOK_NUM}"><img
 							src="./image/${alstn2.BOOK_IMAGE }" alt=""
 							style="width: 167px; height: 107px;" /></a>
+							<a href="bookview.do?bookNum=${alstn2.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">gtg</a>
+							
 					</div>
 					<!-- end photo cover -->
 
@@ -236,6 +249,13 @@ body {
 	</div>
 	<!-- end main -->
 </div>
+		<!-- Modal -->
+		<div class="modal fade" id="show" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content"></div>
+			</div>
+		</div>
 <div class="shell">
 	<div class="title">
 		신간
