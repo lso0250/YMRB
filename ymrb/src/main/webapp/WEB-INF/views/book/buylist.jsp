@@ -13,7 +13,7 @@ a {text-decoration: none;
     padding:20px;
     }
  .table{   
- 			display:inline-block;
+ 			display:inline-block;  
  
  }
  .body{
