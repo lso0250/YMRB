@@ -12,7 +12,7 @@ a {text-decoration: none;
     font-size:20px;
     padding:20px;
     }
- .table{
+ .table{   
  			display:inline-block;
  
  }
