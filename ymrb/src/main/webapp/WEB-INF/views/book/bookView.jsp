@@ -12,10 +12,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/style22.css">
 <style>
-body {
-	background: #ddd;
-}
-
 #container {
 	margin-left: 195px;
 }
