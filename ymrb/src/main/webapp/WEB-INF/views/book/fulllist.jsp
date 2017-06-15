@@ -6,10 +6,10 @@
 <head>
 <title>Free CSS template by ChocoTemplates.com</title>
 </head>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/verticalmenu.css"
+	href="${pageContext.request.contextPath}/css/verticalmenu2.css"
 	media="screen">
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		var currentPosition = parseInt($("#floatMenu").css("top"));
@@ -105,7 +105,6 @@ body {
 		<li><a id='im1'><img src="css/images/insert.jpg" id="1"
 				align='left'>소설</a>
 			<ul class='count'>
-				<li><a href="menulist.do?codeContents=">소설 전체</a></li>
 				<li><a href="menulist.do?codeContents=9">한국소설</a></li>
 				<li><a href="menulist.do?codeContents=10">SF소설</a></li>
 				<li><a href="menulist.do?codeContents=11">국내판타지소설</a></li>
@@ -115,7 +114,6 @@ body {
 		<li><a id='im2'><img src="css/images/insert.jpg" id="2"
 				align='left'>경영/경제</a>
 			<ul class='count'>
-				<li><a href="menulist2.do">경영/경제 전체</a></li>
 				<li><a href="menulist2.do?codeContents=15">경영일반</a></li>
 				<li><a href="menulist2.do?codeContents=16">경제일반</a></li>
 				<li><a href="menulist2.do?codeContents=17">마케팅/세일즈</a></li>
@@ -124,7 +122,6 @@ body {
 		<li><a id='im3'><img src="css/images/insert.jpg" id="3"
 				align='left'>어린이/청소년</a>
 			<ul class='count'>
-				<li><a href="menulist3.do">어린이/청소년 전체</a></li>
 				<li><a href="menulist3.do?codeContents=20">유아</a></li>
 				<li><a href="menulist3.do?codeContents=21">어린이</a></li>
 				<li><a href="menulist3.do?codeContents=22">청소년</a></li>
@@ -132,7 +129,6 @@ body {
 		<li><a id='im4'><img src="css/images/insert.jpg" id="4"
 				align='left'>잡지</a>
 			<ul class='count'>
-				<li><a href="menulist4.do">잡지 전체</a></li>
 				<li><a href="menulist4.do?codeContents=24">경영/재테크</a></li>
 				<li><a href="menulist4.do?codeContents=25">문학/교양</a></li>
 				<li><a href="menulist4.do?codeContents=26">여성/패션/뷰티</a></li>
@@ -143,8 +139,7 @@ body {
 		<li><a id='im5'><img src="css/images/insert.jpg" id="5"
 				align='left'>인문/사회/역사</a>
 			<ul class='count'>
-				<li><a href="menulist5.do">인문/사회/역사 전체</a></li>
-				<li><a href=menulist5.do?codeContents=31>인문</a></li>
+				<li><a href="menulist5.do?codeContents=31">인문</a></li>
 				<li><a href="menulist5.do?codeContents=32">정치/사회</a></li>
 				<li><a href="menulist5.do?codeContents=33">예술/문화</a></li>
 				<li><a href="menulist5.do?codeContents=34">역사</a></li>
@@ -152,7 +147,6 @@ body {
 		<li><a id='im6'><img src="css/images/insert.jpg" id="6"
 				align='left'>자기계발</a>
 			<ul class='count'>
-				<li><a href="menulist6.do">자기계발 전체</a></li>
 				<li><a href="menulist6.do?codeContents=36">성공/삶의자세</a></li>
 				<li><a href="menulist6.do?codeContents=37">기획/창의/리더십</a></li>
 				<li><a href="menulist6.do?codeContents=38">취업/창업</a></li>
@@ -161,7 +155,6 @@ body {
 		<li><a id='im7'><img src="css/images/insert.jpg" id="7"
 				align='left'>여행</a>
 			<ul class='count'>
-				<li><a href="menulist7.do?">여행 전체</a></li>
 				<li><a href="menulist7.do?codeContents=40">국내여행</a></li>
 				<li><a href="menulist7.do?codeContents=41">해외여행</a></li>
 			</ul></li>

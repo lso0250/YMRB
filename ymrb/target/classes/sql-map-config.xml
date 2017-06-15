@@ -3,13 +3,17 @@
                                "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-	<!-- properties 파일 설정  -->
-    <properties resource="database.properties" />
-    	    
-    <!-- Alias 설정 -->
-    <typeAliases>
-        <!-- <typeAlias alias="board" type="com.springbook.biz.board.BoardVO"/> -->
-    </typeAliases>
+	<!-- properties 파일 설정 -->
+	<properties resource="database.properties" />
+
+	<!-- Alias 설정 -->
+	<typeAliases>
+		<typeAlias alias="user" type="com.yedam.ymrb.user.UserVO" />
+		<typeAlias alias="cart" type="com.yedam.ymrb.cart.CartVO" />
+		<typeAlias alias="board" type="com.yedam.ymrb.board.BoardVO" />
+		<typeAlias alias="pboard" type="com.yedam.ymrb.pboard.PBoardVO" />
+		<typeAlias alias="reply" type="com.yedam.ymrb.reply.ReplyVO" />
+	</typeAliases>
 
 	<!-- DataSource 설정 -->
 	<environments default="development">
@@ -23,11 +27,12 @@
 			</dataSource>
 		</environment>
 	</environments>
-  
-    <!-- Sql Mapper 설정 -->
-    <mappers>
-        <mapper resource="mappings/book-mapping.xml"/>
-          <mapper resource="mappings/genre-mapping.xml"/>
-    </mappers>   
-    
+
+	<!-- Sql Mapper 설정 -->
+	<mappers>
+		<mapper resource="mappings/book-mapping.xml" />
+		<mapper resource="mappings/genre-mapping.xml" />
+		<mapper resource="mappings/buylist-mapping.xml" />
+	</mappers>
+
 </configuration>

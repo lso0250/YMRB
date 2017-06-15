@@ -22,5 +22,12 @@ public class GenreControll {
 		return genreService.getGenreList(vo);
 	}
 	
+	@RequestMapping("/genrelist2.do")
+	
+	public @ResponseBody List<Genre2VO> getGenreList2(Genre2VO vo) throws Exception {
+	
+		
+		return genreService.getGenreList2(vo);
+	}
 	
 }

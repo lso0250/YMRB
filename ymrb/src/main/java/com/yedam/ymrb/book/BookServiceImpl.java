@@ -12,31 +12,37 @@ import org.springframework.stereotype.Service;
 
 @Service("bookService")
 public class BookServiceImpl implements BookService {
-
 	@Autowired
-    //private BoardDAOSpring boardDAO;   
 	private BookDAOMybatis bookDAO;
     
     public void insertBook(BookVO vo) {
     	bookDAO.insertBook(vo);
-       
-        //트랜잭션 테스트
-        //boardDAO.insertBoard(vo);
     }
-    public void insertBook2(BookVO vo) {
-    	bookDAO.insertBook2(vo);
-       
-        //트랜잭션 테스트
-        //boardDAO.insertBoard(vo);
-    }
+    
     
     public BookVO bookView(BookVO vo) {  	
         return bookDAO.bookView(vo);
     }
+    //조회수
+    public void updateBook(BookVO vo) {
+    	bookDAO.updateBook(vo);
+    }
+    public void updateBook1(BookVO vo) {
+    	bookDAO.updateBook1(vo);
+    }
+    public void updateBook2(BookVO vo) {
+    	bookDAO.updateBook2(vo);
+    }
+    public List<BookVO> getBookList(BookVO vo) {
+        return bookDAO.getBookList(vo);
+    }
+    public List<BookVO> getSeriseList(BookVO vo) {
+        return bookDAO.getSeriseList(vo);
+    }
     public BookVO codetitle(BookVO vo) {  	
         return bookDAO.codetitle(vo);
     }
-    public List<BookVO> getBookList(BookVO vo) {
+    public List<BookVO> getBookList1(BookVO vo) {
         return bookDAO.getBookList(vo);
     }
     public List<BookVO> getBookList2(BookVO vo) {

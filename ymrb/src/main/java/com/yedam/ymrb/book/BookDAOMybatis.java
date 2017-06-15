@@ -6,10 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-
-
-
 @Repository
 public class BookDAOMybatis {
 	
@@ -18,21 +14,33 @@ public class BookDAOMybatis {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertBook(BookVO vo) {
-       
         mybatis.insert("BookDAO.insertBook", vo);
     }
-	public void insertBook2(BookVO vo) {
-	       
-        mybatis.insert("BookDAO.insertBook2", vo);
-    }
-	public BookVO bookView(BookVO vo) {
-       
+	public BookVO bookView(BookVO vo) {    
         return (BookVO) mybatis.selectOne("BookDAO.bookView", vo);
     }
+	//조회수
+	public void updateBook(BookVO vo) {   
+        mybatis.update("BookDAO.updateBook", vo);
+    }
+	public void updateBook1(BookVO vo) { 
+        mybatis.update("BookDAO.updateBook1", vo);
+    }
+	public void updateBook2(BookVO vo) { 
+        mybatis.update("BookDAO.updateBook2", vo);
+    }
+	public List<BookVO> getBookList(BookVO vo) {      
+        return mybatis.selectList("BookDAO.getBookList", vo);
+    }
+	public List<BookVO> getSeriseList(BookVO vo) {	      
+        return mybatis.selectList("BookDAO.getSeriseList", vo);
+    }	
+
+
 	public BookVO codetitle(BookVO vo){
 		return (BookVO) mybatis.selectOne("BookDAO.codetitle", vo);
 	}
-	public List<BookVO> getBookList(BookVO vo) {
+	public List<BookVO> getBookList1(BookVO vo) {
 	      
         return mybatis.selectList("BookDAO.getBookList", vo);
     }

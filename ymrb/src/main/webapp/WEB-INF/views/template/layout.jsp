@@ -11,21 +11,35 @@
 <meta name="author" content="">
 <title>Insert title here</title>
 
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/heroic-features.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/heroic-features.css" rel="stylesheet">
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/css/images/favicon.ico?cb=1" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="all" />
-	<script src="${pageContext.request.contextPath}/css/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="./css/jquery-ui-1.8.5.custom.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="./css/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
-	<script src="./css/fancybox/jquery.fancybox-1.3.1.js" type="text/javascript" charset="utf-8"></script>
-	<script src="./css/fancybox/jquery.mousewheel-3.0.2.pack.js" type="text/javascript" charset="utf-8"></script>
-	<script src="./css/js-func.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/jquery-ui-1.8.5.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/fancybox/jquery.fancybox-1.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/fancybox/jquery.mousewheel-3.0.2.pack.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/js-func.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+</script>
+	
 <title>Insert title here</title>
-<!-- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <style>
+article{
+	padding-top:150px; 
+}
 #l1{
 margin-left: 100px;}
 </style>
@@ -53,15 +67,29 @@ margin-left: 100px;}
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li id="l1"><a href="menu.do?codeContents=9"> &nbsp;&nbsp;&nbsp;&nbsp;전체분류</a></li>
-							<li><a href="comic.do"> &nbsp;&nbsp;&nbsp;&nbsp;일반</a></li>
-							<li><a href="romance.do">
-									&nbsp;&nbsp;&nbsp;&nbsp;로맨스 </a></li>
-							<li><a href="fantasy.do">
-									&nbsp;&nbsp;&nbsp;&nbsp;판타지 </a></li>
-							<li id="l1"><a href="comic.do"> &nbsp;&nbsp;&nbsp;&nbsp;${nic}님 환영합니다. 보유 포인트 : ${point} </a></li>
-							<li><a href="comic.do"> &nbsp;&nbsp;정보수정 </a></li>
-							<li><a href="comic.do"> &nbsp;&nbsp;마이페이지</a></li>
-	
+							<li><a href="comic.do"> &nbsp;&nbsp;&nbsp;만화</a></li>
+							<li><a href="romance.do">&nbsp;&nbsp;&nbsp;로맨스 </a></li>
+							<li><a href="fantasy.do">&nbsp;&nbsp;&nbsp;판타지 </a></li>
+							<li><a href="test.do">&nbsp;&nbsp;&nbsp;갸시팔 </a></li>
+							<li><a href="getBoardList.do"> &nbsp;&nbsp;게시판</a></li>
+							<li><a href="getPBoardList.do"> &nbsp;&nbsp;연재게시판</a></li>
+							<c:if test="${login.mem_id == null }">
+								<li><a  href="" onclick="window.open('${pageContext.request.contextPath}/login.do','signup','width=300')"> &nbsp;&nbsp;로그인 </a></li>
+								
+								<li><a data-toggle="modal" data-target="#modal-testNew"  role="button" data-backdrop="static" href="${pageContext.request.contextPath}/login.do" > &nbsp;&nbsp;로그인 </a></li>
+								<a href="login.do" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+  								Launch demo modal
+								</a>
+								<li><a href="" onclick="contact()" class=".big-image" <%-- onclick="window.open('${pageContext.request.contextPath}/userInsert.do','userInsert','width=300')" --%>> &nbsp;&nbsp;회원가입</a></li>
+							</c:if>		
+							<c:if test="${login.mem_id != null }">
+								<li id="l1"><a href="comic.do"> &nbsp;&nbsp;&nbsp;&nbsp;${login.mem_nic}님- 보유 포인트 : ${login.mem_point} </a></li>
+								<li><a href="logout.do" > &nbsp;&nbsp;로그아웃  </a></li>
+								<li><a href="comic.do"> &nbsp;&nbsp;마이페이지</a></li>
+								<c:if test="${login.mem_id == 'admin' }">
+									<li><a href="getUserList.do"> &nbsp;&nbsp;관리자 페이지</a></li>
+								</c:if>
+							</c:if>
 						</ul>
 					</div>
 					<!-- /.navbar-collapse -->
@@ -69,7 +97,14 @@ margin-left: 100px;}
 				<!-- /.container -->
 			</nav>
 		</header>
-
+		<br><br><br><br>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content"></div>
+			</div>
+		</div>
 		<article>
 			<tiles:insertAttribute name="content" />
 		</article>

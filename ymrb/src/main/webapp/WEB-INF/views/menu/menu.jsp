@@ -6,10 +6,7 @@
 <head>
 <title>Free CSS template by ChocoTemplates.com</title>
 </head>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="./css/verticalmenu.css"
-	media="screen">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/reader/css/verticalmenu2.css" media="screen">
 <script type="text/javascript">
 	$(document).ready(function() {
 		var currentPosition = parseInt($("#floatMenu").css("top"));
@@ -139,7 +136,7 @@ body {
 		<li><a id='im5'><img src="css/images/insert.jpg" id="5"
 				align='left'>인문/사회/역사</a>
 			<ul class='count'>
-				<li><a href=menulist5.do?codeContents=31>인문</a></li>
+				<li><a href="menulist5.do?codeContents=31">인문</a></li>
 				<li><a href="menulist5.do?codeContents=32">정치/사회</a></li>
 				<li><a href="menulist5.do?codeContents=33">예술/문화</a></li>
 				<li><a href="menulist5.do?codeContents=34">역사</a></li>
@@ -155,15 +152,17 @@ body {
 		<li><a id='im7'><img src="css/images/insert.jpg" id="7"
 				align='left'>여행</a>
 			<ul class='count'>
-				<li><a href="menulist7.do?codeContents=40">국내여행</a></li>
-				<li><a href="menulist7.do?codeContents=41">해외여행</a></li>
+				<li><a href="menulist7.do?codeContents=41">국내여행</a></li>
+				<li><a href="menulist7.do?codeContents=42">해외여행</a></li>
 			</ul></li>
 
 	</ul>
 </div>
+
 <div class="shell">
 	<div class="title">
 		베스트셀러
+		 <a href="bookSel.do" class="big-image">aaaaaaa</a>
 	</div>
 	<hr>
 	<div id="main">

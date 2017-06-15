@@ -136,14 +136,14 @@ fieldset {
 </head>
 <body>
 <div class="container">  
-  <form id="contact" action="" method="post">
+  <form id="contact" action="${pageContext.request.contextPath}/findPw.do" method="post">
     <h3> </h3>
     <h4> </h4>
     <fieldset>
-      <input placeholder="아이디" type="text" tabindex="1" required autofocus>
+      <input placeholder="아이디" type="text" name= "mem_id" tabindex="1" required autofocus>
     </fieldset>
         <fieldset>
-      <input placeholder="email" type="email" tabindex="1" required autofocus>
+      <input placeholder="email" type="email" name="mem_email" tabindex="2" required autofocus>
     </fieldset>
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">비밀번호 찾기</button>

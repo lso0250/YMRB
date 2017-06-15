@@ -136,11 +136,11 @@ fieldset {
 </head>
 <body>
 <div class="container">  
-  <form id="contact" action="" method="post">
+  <form id="contact" action="${pageContext.request.contextPath}/findId.do" method="post">
     <h3> </h3>
     <h4> </h4>
     <fieldset>
-      <input placeholder="email" type="email" tabindex="1" required autofocus>
+      <input placeholder="email" name="mem_email" type="email" tabindex="1" required autofocus>
     </fieldset>
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">아이디 찾기</button>

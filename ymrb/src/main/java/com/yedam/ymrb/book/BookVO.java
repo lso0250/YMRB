@@ -26,19 +26,47 @@ public class BookVO {
 	private String[] dateserise;
 	private MultipartFile[] fileserise;
 	private String codeContents;
+	private String code_contents;
+	private String code_contents2;
 	private Date bookDate;
-	
-	public Date getBookDate() {
-		return bookDate;
-	}
-	public void setBookDate(Date bookDate) {
-		this.bookDate = bookDate;
-	}
+	private int bookHit;
+	private int [] chackBox;
+
 	public String getCodeContents() {
 		return codeContents;
 	}
 	public void setCodeContents(String codeContents) {
 		this.codeContents = codeContents;
+	}
+	public String getCode_contents() {
+		return code_contents;
+	}
+	public void setCode_contents(String code_contents) {
+		this.code_contents = code_contents;
+	}
+	public String getCode_contents2() {
+		return code_contents2;
+	}
+	public void setCode_contents2(String code_contents2) {
+		this.code_contents2 = code_contents2;
+	}
+	public int getBookHit() {
+		return bookHit;
+	}
+	public void setBookHit(int bookHit) {
+		this.bookHit = bookHit;
+	}
+	public int[] getChackBox() {
+		return chackBox;
+	}
+	public void setChackBox(int[] chackBox) {
+		this.chackBox = chackBox;
+	}
+	public Date getBookDate() {
+		return bookDate;
+	}
+	public void setBookDate(Date bookDate) {
+		this.bookDate = bookDate;
 	}
 	public MultipartFile[] getFileserise() {
 		return fileserise;

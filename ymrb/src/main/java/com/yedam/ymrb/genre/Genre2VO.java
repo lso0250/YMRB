@@ -3,10 +3,16 @@ package com.yedam.ymrb.genre;
 public class Genre2VO {
 	
 	private String codecontents;
-	private int booknum; 
+	private int bookNum; 
 	private String codecontents2;
 	private String cnum;
 	
+	public int getBookNum() {
+		return bookNum;
+	}
+	public void setBookNum(int bookNum) {
+		this.bookNum = bookNum;
+	}
 	public String getCnum() {
 		return cnum;
 	}
@@ -20,12 +26,7 @@ public class Genre2VO {
 	public void setCodecontents(String codecontents) {
 		this.codecontents = codecontents;
 	}
-	public int getBooknum() {
-		return booknum;
-	}
-	public void setBooknum(int booknum) {
-		this.booknum = booknum;
-	}
+
 	public String getCodecontents2() {
 		return codecontents2;
 	}

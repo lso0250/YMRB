@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -57,12 +59,8 @@
     <body>
       <div id="sidebar">
         <div id="panels">
-          <input id="searchBox" placeholder="search" type="search">
-
-          <a id="show-Search" class="show_view icon-search" data-view="Search">Search</a>
-          <a id="show-Toc" class="show_view icon-list-1 active" data-view="Toc">TOC</a>
+		 <a id="show-Toc" class="show_view icon-list-1 active" data-view="Toc">TOC</a>
           <a id="show-Bookmarks" class="show_view icon-bookmark" data-view="Bookmarks">Bookmarks</a>
-          <a id="show-Notes" class="show_view icon-edit" data-view="Notes">Notes</a>
 
         </div>
         <div id="tocView" class="view">
@@ -89,7 +87,7 @@
           </div>
           <div id="metainfo">
             <span id="book-title"></span>
-            <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
+            <span id="title-seperator">&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span id="chapter-title"></span>
           </div>
           <div id="title-controls">
@@ -111,7 +109,8 @@
               <h3>Settings</h3>
               <div>
                   <p>
-                    <input type="checkbox" id="sidebarReflow" name="sidebarReflow">Reflow text when sidebars are open.
+                    <input type="checkbox" id="sidebarReflow" name="sidebarReflow">
+	사이드 바를 열 때 텍스트를 Reflow 합니다.
                   </p>
               </div>
               <div class="closer icon-cancel-circled"></div>

@@ -5,6 +5,7 @@
 
 <head>
 <title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/css/bootstrap.min.js"></script>
 
 <style>
 @font-face{
@@ -18,7 +19,7 @@ src:url(font/NanumGothic-Bold.ttf) format('truetype')
 
 
 * {
-	border-radius: 5px;
+	/* border-radius: 5px; */
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
@@ -52,14 +53,16 @@ body {
 
 
 
-.container {
+.container1 {
 	max-width:350px;
 	width:100%;
 	margin:0 auto;
 	position:relative;
 }
 
-#contact input[type="text"], #contact input[type="email"], #contact input[type="tel"], #contact input[type="password"], #contact textarea, #contact button[type="submit"] { font:400 12px/16px NanumGothic, Helvetica, Arial, sans-serif; }
+#contact input[type="text"], #contact input[type="password"], #contact textarea, #contact button[type="submit"] {
+	font:400 12px/16px NanumGothic, Helvetica, Arial, sans-serif; 
+ }
 
 #contact {
 	background:#F9F9F9;
@@ -88,7 +91,8 @@ fieldset {
 	width: 100%;
 }
 
-#contact input[type="text"], #contact input[type="email"], #contact input[type="tel"], #contact input[type="password"], #contact textarea {
+#contact input[type="text"],  #contact input[type="password"] {
+	border-radius: 5px;
 	width:100%;
 	border:1px solid #CCC;
 	background:#FFF;
@@ -96,20 +100,15 @@ fieldset {
 	padding:10px;
 }
 
-#contact input[type="text"]:hover, #contact input[type="email"]:hover, #contact input[type="tel"]:hover, #contact input[type="password"]:hover, #contact textarea:hover {
+#contact input[type="text"]:hover, #contact input[type="password"]:hover{
 	-webkit-transition:border-color 0.3s ease-in-out;
 	-moz-transition:border-color 0.3s ease-in-out;
 	transition:border-color 0.3s ease-in-out;
 	border:1px solid #AAA;
 }
 
-#contact textarea {
-	height:100px;
-	max-width:100%;
-  resize:none;
-}
-
 #contact button[type="submit"] {
+	border-radius: 5px;
 	cursor:pointer;
 	width:100%;
 	border:none;
@@ -149,8 +148,15 @@ fieldset {
 </style>
 </head>
 <body>
-<div class="container">  
+<div class="container1">  
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">×</button>
+</div>
+
+                    
   <form id="contact" action="${pageContext.request.contextPath}/login.do" method="post">
+  <div class="modal-body">
     <h3> </h3>
     <h4> </h4>
     <fieldset>
@@ -160,13 +166,15 @@ fieldset {
       <input placeholder="비밀번호" name="mem_pw"type="password" tabindex="2" required>
     </fieldset>
     <fieldset >
-    <a href="findPw.do" class="">비밀번호 찾기</a>
-    <a href="findId.do" class="">아이디 찾기</a>
-      
+    <a href="findPwForm.do" class="">비밀번호 찾기</a>
+    <a href="findIdForm.do" class="">아이디 찾기</a>
     </fieldset>
+ </div>
+  <div class="modal-footer"> 
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">로그인</button>
     </fieldset>
+   </div>
   </form>
  
   

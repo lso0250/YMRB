@@ -891,11 +891,7 @@ font-size: 20px;}</style>
 	<!-- end main -->
 </div>
 <!-- end shell -->
-    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/css/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${pageContext.request.contextPath}/css/bootstrap.min.js"></script>
 
 </body>
 

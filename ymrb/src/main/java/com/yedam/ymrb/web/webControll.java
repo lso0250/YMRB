@@ -27,11 +27,11 @@ public class webControll {
 
 	@RequestMapping("/reader/")
 	public String reader(){
-		return "/reader/index3";
+		return "/popup/reader/index3";
 	}
-	@RequestMapping("reader2.do")
+	@RequestMapping("/reader2/")
 	public String reader2(){
-		return "/popup/reader/reader2";
+		return "/popup/reader/index2";
 	}
 
 }

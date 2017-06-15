@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
 @Repository
 public class GenreDAOMybatis {
 
@@ -23,5 +25,15 @@ public class GenreDAOMybatis {
 	public void genreInsert(Genre2VO vo) {
        
         mybatis.insert("GenreDAO.genreInsert", vo);
+    }
+	//수정
+	public List<Genre2VO> getGenreList2(Genre2VO vo) {
+        
+        return mybatis.selectList("GenreDAO.getGenreList2", vo);
+    }	
+	
+	public void updateGenre(Genre2VO vo) {
+        
+        mybatis.update("GenreDAO.updateGenre", vo);
     }
 }

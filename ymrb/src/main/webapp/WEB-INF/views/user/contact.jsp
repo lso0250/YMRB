@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="./scripts/jquery-3.1.1.min.js"></script>
 <script>
@@ -11,8 +12,9 @@ var checkNIC='no';
 var checkPW='no';
 
 function checkId(){
-	var param = {'mem_id':$('#mem_id').val()}
-	$.getJSON("checkId.do",param,function(data){
+	/* var param = {'mem_id':encodeURIComponent($('#mem_id').val())} */
+	var param = {'mem_id':$('#mem_id').val()};
+	/*$.getJSON("checkId.do",param,function(data){
 		
 		if(data){
 			$('#checkid').html('<b style="color:green">사용가능 </b>');
@@ -22,12 +24,29 @@ function checkId(){
 			$('#checkid').html('<b style="color:red">사용불가 </b>');
 			checkID='no';
 		}
+	}) */
+	$.ajax({
+		url:"checkId.do",
+		type:"post",
+		data:param,
+		dataType:"HTML",
+		success:function(data){
+			alert(data);
+			if(data =='true'){
+				$('#checkid').html('<b style="color:green">사용가능 </b>');
+				checkID='yes';
+			}
+			else{
+				$('#checkid').html('<b style="color:red">사용불가 </b>');
+				checkID='no';
+			}
+		}
 	})
 }
 function checkNic(){
-	var param = {'mem_nic':$('#mem_nic').val()}
-	$.getJSON("checkNic.do",param,function(data){
-		
+	/* var param = {'mem_nic':encodeURIComponent($('#mem_nic').val())} */
+	var param = {'mem_nic':$('#mem_nic').val()};
+	/* $.ajax("checkNic.do",param,function(data){
 		if(data){
 			$('#checknic').html('<b style="color:green">사용가능 </b>');
 			checkNic='yes';
@@ -36,6 +55,24 @@ function checkNic(){
 			$('#checknic').html('<b style="color:red">사용불가 </b>');
 			checkNic='no';
 		}
+	}) */
+	$.ajax({
+		url:"checkNic.do",
+		data:param,
+		type:"post",
+		dataType:"HTML",
+		success:function(data){
+			alert(data);
+			if(data == 'true'){
+				$('#checknic').html('<b style="color:green">사용가능 </b>');
+				checkID='yes';
+			}
+			else{
+				$('#checknic').html('<b style="color:red">사용불가 </b>');
+				checkID='no';
+			}
+		}
+		
 	})
 }
 
@@ -49,6 +86,24 @@ function checkPw(){
 	}else{
 		$('#checkpw').html('<b style="color:green">사용가능 </b>');
 		checkPW='yes';
+	}
+}
+function memberReg(){
+	if(checkID!='no'){
+		if(checkNIC!='no'){
+			if(checkPW!='no'){
+				return true;
+			}else{
+				alert("비밀번호를 확인해주세요");
+				return false;
+			}
+		}else{
+			alert("닉네임을 확인해주세요");
+			return false;
+		}
+	}else{
+		alert("아이디를 확인해주세요");
+		return false;
 	}
 }
 
@@ -67,7 +122,7 @@ src:url(font/NanumGothic-Bold.ttf) format('truetype')
 
 
 * {
-	border-radius: 5px;
+	
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
@@ -89,14 +144,16 @@ src:url(font/NanumGothic-Bold.ttf) format('truetype')
 	
 }
 
-.container {
+.container1 {
 	max-width:350px;
 	width:100%;
 	margin:0 auto;
 	position:relative;
 }
 
-#contact input[type="text"], #contact input[type="email"],#contact input[type="date"], #contact input[type="tel"], #contact input[type="password"], #contact button[type="submit"] { font:400 12px/16px NanumGothic, Helvetica, Arial, sans-serif; }
+#contact input[type="text"], #contact input[type="email"],#contact input[type="date"], #contact input[type="tel"], #contact input[type="password"], #contact button[type="submit"] {
+ font:400 12px/16px NanumGothic, Helvetica, Arial, sans-serif; 
+ }
 
 #contact {
 	background:#F9F9F9;
@@ -132,6 +189,7 @@ fieldset {
 }
 
 #contact input[type="text"], #contact input[type="email"], #contact input[type="date"], #contact input[type="tel"], #contact input[type="password"] {
+	border-radius: 5px;
 	width:85%;
 	border:1px solid #CCC;
 	background:#FFF;
@@ -144,11 +202,13 @@ fieldset {
 	-moz-transition:border-color 0.3s ease-in-out;
 	transition:border-color 0.3s ease-in-out;
 	border:1px solid #AAA;
+	border-radius: 5px;
 }
 
 
 
 #contact button[type="submit"] {
+	border-radius: 5px;
 	cursor:pointer;
 	width:100%;
 	border:none;
@@ -168,10 +228,7 @@ fieldset {
 
 #contact button[type="submit"]:active { box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5); }
 
-#contact input:focus, #contact textarea:focus {
-	outline:0;
-	border:1px solid #999;
-}
+
 ::-webkit-input-placeholder {
  color:#888;
 }
@@ -277,7 +334,7 @@ input[type='checkbox']:checked + label > span:before{
 </style>
 </head>
 <body class="eee">
-<div class="container">  
+<div class="container1">  
   <form id="contact" action="" method="post">
     <h3>회원 가입</h3>
     <h4> </h4>
@@ -294,11 +351,11 @@ input[type='checkbox']:checked + label > span:before{
     </fieldset>
     <fieldset>
       <input placeholder="비밀번호 확인" type="password" name="mem_pwc" onkeyup="checkPw()" id="mem_pwc" tabindex="3" required>
-      <span id="checkpw">....</span>
+      <span id="checkpw"></span>
     </fieldset>
      <fieldset>
       <input placeholder="닉네임" name="mem_nic" id="mem_nic" type="text" onchange="checkNic();" tabindex="4" required>
-      <span id="checknic">....</span>
+      <span id="checknic"></span>
     </fieldset>
     <fieldset>
       <input placeholder="휴대전화" name = "mem_phone" type="tel" tabindex="5" required>
@@ -339,7 +396,7 @@ input[type='checkbox']:checked + label > span:before{
     	<ins><i>장르4</i></ins>
   		</label>
   </section>
-    </fieldset>
+    </fieldset>	
     
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">가입하기</button>

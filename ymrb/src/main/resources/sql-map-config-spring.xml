@@ -2,11 +2,18 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
                                "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!-- Alias 설정 -->
-   <typeAliases>
-      
-        <typeAlias alias="book" type="com.yedam.ymrb.book.BookVO"/>
-          <typeAlias alias="genre" type="com.yedam.ymrb.genre.GenreVO"/>
-    </typeAliases>
-    
+	<!-- Alias 설정 -->
+	<typeAliases>
+
+		<typeAlias alias="book" type="com.yedam.ymrb.book.BookVO" />
+		<typeAlias alias="genre" type="com.yedam.ymrb.genre.GenreVO" />
+		<typeAlias alias="buylist" type="com.yedam.ymrb.buylist.BuyVO" />
+		<typeAlias alias="user" type="com.yedam.ymrb.user.UserVO" />
+		<typeAlias alias="cart" type="com.yedam.ymrb.cart.CartVO" />
+		<typeAlias alias="board" type="com.yedam.ymrb.board.BoardVO" />
+		<typeAlias alias="pboard" type="com.yedam.ymrb.pboard.PBoardVO" />
+		<typeAlias alias="reply" type="com.yedam.ymrb.reply.ReplyVO" />
+
+	</typeAliases>
+
 </configuration>

@@ -14,8 +14,31 @@
 		SELECT CODE_NUM, CODE_CONTENTS FROM GENRE WHERE CODE_LIST=#{codelist}
 	
 	</select>
+	
+	<select id="getGenreList2" resultType="map" parameterType="genre">
+	  
+		SELECT  CODE_CONTENTS,CODE_CONTENTS2 FROM GENRE2 WHERE BOOK_NUM=#{bookNum}
+	
+	</select>
+	<insert id="genreInsert" parameterType="genre">
+        <![CDATA[ 
+         
+        INSERT INTO GENRE2(C_NUM,CODE_CONTENTS,BOOK_NUM,CODE_CONTENTS2) 
+        VALUES((select nvl(max(C_NUM),0)+1 from GENRE2),#{codecontents}
+        	  ,#{bookNum},#{codecontents2})
+        ]]>
 
 
+	</insert>
+	<update id="updateGenre">
+        <![CDATA[
+        UPDATE GENRE2 SET
+             CODE_CONTENTS =	#{codecontents}, 
+            CODE_CONTENTS2 = #{codecontents2}
+        WHERE BOOK_NUM = #{bookNum}
+        ]]>
+	</update>
+	
 </mapper>
 
  

@@ -9,7 +9,7 @@
 .button1 {
 	display: inline-block;
 	border-radius: 4px;
-	background-color: black;
+	background-color: white;
 	border: none;
 	text-align: center;
 	font-size: 15px;
@@ -99,7 +99,7 @@
 </head>
 <body>
 <div class="first">
-	<div class="two" id="id" >
+	<div class="two" id="id" style="background-color : white;" >
 		<b>alstn7456님</b><br>
 		<b>어서 오세요</b>
 		<br>

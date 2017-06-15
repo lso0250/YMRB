@@ -1,20 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--select id값은 유니크 해야하는데, list <이런식으로 같을수가 있다. 
-이럴때 namespace로 구분한다  -->
+<!--select id값은 유니크 해야하는데, list <이런식으로 같을수가 있다. 이럴때 namespace로 구분한다 -->
 <mapper namespace="BoardDAO">
-		<!--type:"패키지명.클래스명" // board-mapper에서 패키지명.클래스명을 board로 사용한다고 선언해서 이런식으로 작성함.-->
-		<!-- resultMap은 결과를 매핑하는것이다. 쿼리 결과가 조인구문을 포함할때는 검색 결과를 하나의 자바객체로 매핑할 수 없다. 이럴때 매핑해줘야함  -->
+	<!--type:"패키지명.클래스명" // board-mapper에서 패키지명.클래스명을 board로 사용한다고 선언해서 이런식으로 
+		작성함. -->
+	<!-- resultMap은 결과를 매핑하는것이다. 쿼리 결과가 조인구문을 포함할때는 검색 결과를 하나의 자바객체로 매핑할 수 없다. 
+		이럴때 매핑해줘야함 -->
+	<resultMap type="board" id="boardResult">
+		<id property="board_num" column="BOARD_NUM" />
+		<result property="board_title" column="BOARD_TITLE" />
+		<result property="mem_num" column="MEM_NUM" />
+		<result property="board_contents" column="BOARD_CONTENTS" />
+		<result property="board_date" column="BOARD_DATE" />
+		<result property="board_hits" column="BOARD_HITS" />
+	</resultMap>
 
+	<insert id="insertBoard" parameterType="board">
+		<selectKey keyProperty="board_num" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(BOARD_NUM), 0) + 1 FROM BOARD
+		</selectKey>
+		INSERT INTO BOARD(BOARD_NUM
+		,BOARD_TITLE
+		,MEM_NUM
+		,BOARD_CONTENTS
+		,BOARD_DATE
+		,BOARD_HITS
+		)
+		VALUES(#{board_num}
+		, #{board_title}
+		, #{mem_num}
+		, #{board_contents}
+		, SYSDATE
+		, 0
+		)
 
+	</insert>
+	
+	<update id="updateBoard" parameterType="board">
+        UPDATE BOARD 
+        SET
+            BOARD_TITLE = #{board_title}, 
+            BOARD_CONTENTS = #{board_contents}	 
+        WHERE BOARD_NUM = #{board_num}
+        
+	</update>
+	
+	<update id="boardHits">
+		UPDATE BOARD
+		SET
+			BOARD_HITS = BOARD_HITS+1
+		WHERE BOARD_NUM = #{board_num}
+			
+	</update>
+	
+	<delete id="deleteBoard">
+        <![CDATA[
+        DELETE BOARD
+        WHERE BOARD_NUM = #{board_num}
+        ]]>
+	</delete>
 
-
-	<select id="getBoard">
+	<select id="getBoard" resultType="board">
         <![CDATA[
         SELECT * 
         FROM BOARD
-        WHERE SEQ = #{seq}
+        WHERE board_num = #{board_num}
+        ]]>
+	</select>
+	
+	<select id="getBoardList" resultType="map">
+        <![CDATA[
+        SELECT  BOARD_NUM 						AS "boardNum"
+		,BOARD_TITLE							AS "boardTitle"
+		,MEM_NUM								AS "memNum"
+		,TO_CHAR(BOARD_DATE, 'YYYY-MM-DD')		AS "boardDate"
+		,BOARD_HITS								AS "boardHits"
+        FROM BOARD
+        ORDER BY BOARD_NUM DESC
+        ]]>
+	</select>
+
+	<resultMap type="pboard" id="pboardResult">
+		<id property="pboard_num" column="PBOARD_NUM" />
+		<result property="pboard_title" column="PBOARD_TITLE" />
+		<result property="mem_num" column="MEM_NUM" />
+		<result property="pboard_contents" column="PBOARD_CONTENTS" />
+		<result property="pboard_date" column="PBOARD_DATE" />
+		<result property="pboard_hits" column="PBOARD_HITS" />
+		<result property="attachFilename" column="ATTACH_FILENAME" />
+	</resultMap>
+	
+		<insert id="insertPBoard" parameterType="pboard">
+		<selectKey keyProperty="pboard_num" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(PBOARD_NUM), 0) + 1 FROM PBOARD
+		</selectKey>
+		INSERT INTO PBOARD(PBOARD_NUM
+		,PBOARD_TITLE
+		,MEM_NUM
+		,PBOARD_CONTENTS
+		,PBOARD_DATE
+		,PBOARD_HITS
+		<if test="attachFilename != null and attachFilename != '' ">
+        ,ATTACH_FILENAME
+        </if>
+		)
+		VALUES(#{pboard_num}
+		, #{pboard_title}
+		, #{mem_num}
+		, #{pboard_contents}
+		, SYSDATE
+		, 0
+		<if test="attachFilename != null and attachFilename != '' ">
+        , #{attachFilename}
+        </if>
+		)
+
+	</insert>
+	
+	<update id="updatePBoard" parameterType="pboard">
+        UPDATE PBOARD 
+        SET
+            PBOARD_TITLE = #{pboard_title}, 
+            PBOARD_CONTENTS = #{pboard_contents}	 
+        WHERE PBOARD_NUM = #{pboard_num}
+        
+	</update>
+	
+	<update id="pboardHits">
+		UPDATE PBOARD
+		SET
+			PBOARD_HITS = PBOARD_HITS+1
+		WHERE PBOARD_NUM = #{pboard_num}
+			
+	</update>
+	
+	<delete id="deletePBoard">
+        <![CDATA[
+        DELETE PBOARD
+        WHERE PBOARD_NUM = #{pboard_num}
+        ]]>
+	</delete>
+
+	<select id="getPBoard" resultMap="pboardResult">
+        <![CDATA[
+        SELECT *
+        FROM PBOARD
+        WHERE PBOARD_NUM = #{pboard_num}
+        ]]>
+       
+	</select>
+	
+	<select id="getPBoardList" resultMap="pboardResult">
+        <![CDATA[
+        SELECT  PBOARD_NUM 						
+		,PBOARD_TITLE							
+		,MEM_NUM								
+		,TO_CHAR(PBOARD_DATE, 'YYYY-MM-DD')		
+		,PBOARD_HITS							
+        FROM PBOARD
+        ORDER BY PBOARD_NUM DESC
         ]]>
 	</select>
 

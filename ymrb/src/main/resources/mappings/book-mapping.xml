@@ -21,6 +21,10 @@
 		<result property="bookAttactment" column="BOOK_ATTACTMENT"/>
 		<result property="bookContents" column="BOOK_CONTENTS"/>
 		<result property="bookAgeLimit" column="BOOK_AGE_LIMIT"/>
+		<result property="code_contents" column="CODE_CONTENTS"/>
+		<result property="codeContents" column="CODE_CONTENTS"/>
+		<result property="bookContents" column="BOOK_CONTENTS"/>
+		<result property="code_contents2" column="CODE_CONTENTS2"/> 
 	</resultMap> 
 	
 	<insert id="insertBook" parameterType="book"> <!-- 부모책 추가 -->
@@ -29,34 +33,101 @@
 		</selectKey>  
         INSERT INTO BOOK(BOOK_NUM, PARENT_NUM, BOOK_TITLE, BOOK_WRITER, BOOK_PUBLISHER,
         				  BOOK_PRICE,BOOK_RENT,BOOK_PUBLISH_DATE,BOOK_IMAGE,BOOK_ATTACTMENT,BOOK_CONTENTS,
-        				  BOOK_AGE_LIMIT)  
+        				  BOOK_AGE_LIMIT,BOOK_HIT)  
         VALUES(#{bookNum}, #{parentNum},#{bookTitle},#{bookWriter},
         			#{bookPublisher},#{bookprice},#{bookRent},#{bookPublishDate},#{bookImage},#{bookAttactment}
-        				,#{bookContents},#{bookAgeLimit})
-       
-
-
+        				,#{bookContents},#{bookAgeLimit},0)
 	</insert>
-	<select id="selectParent" resultType="map">
-
-		
-		FROM BOOK
-
-	</select>
-
-
+	
+		<!-- 상세보기 -->
 	<select id="bookView" resultMap="bookResult">
         <![CDATA[
-          SELECT B.BOOK_NUM, B.PARENT_NUM, B.BOOK_TITLE, B.BOOK_WRITER, B.BOOK_PUBLISHER,
-		B.BOOK_PRICE,B.BOOK_RENT,B.BOOK_PUBLISH_DATE,B.BOOK_IMAGE,B.BOOK_ATTACTMENT,B.BOOK_CONTENTS,
-		B.BOOK_AGE_LIMIT,(select listagg(g.code_contents,',') WITHIN GROUP (ORDER BY g.code_contents) from genre g, genre2 e  where g.code_num=e.CODE_CONTENTS and e.BOOK_NUM = B.book_num) CODE_CONTENTS,
+          SELECT B.BOOK_NUM,
+                 B.PARENT_NUM, 
+                 B.BOOK_TITLE, 
+                 B.BOOK_WRITER, 
+                 B.BOOK_PUBLISHER,
+		B.BOOK_PRICE,
+		B.BOOK_RENT,
+		to_char(BOOK_PUBLISH_DATE,'YYYY-MM-DD') BOOK_PUBLISH_DATE,
+		B.BOOK_PUBLISH_DATE,
+		B.BOOK_IMAGE,
+		B.BOOK_ATTACTMENT,
+		B.BOOK_CONTENTS,  
+		B.BOOK_AGE_LIMIT,
+		(select listagg(g.code_contents,',') WITHIN GROUP (ORDER BY g.code_contents) from genre g, genre2 e  where g.code_num=e.CODE_CONTENTS and e.BOOK_NUM = B.book_num) CODE_CONTENTS,
     	(select listagg(g.code_contents,',') WITHIN GROUP (ORDER BY g.code_contents) from genre g, genre2 e  where g.code_num=e.CODE_CONTENTS2 and e.BOOK_NUM = B.book_num) CODE_CONTENTS2
    		FROM BOOK B
-  		WHERE B.BOOK_NUM = ${bookNum}
+  		WHERE B.BOOK_NUM = #{bookNum}
         ]]>
 	</select>
 	
+	<!-- 부모 조회 -->
 	<select id="getBookList" resultType="map">
+		SELECT *
+		FROM 	BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		and g.CODE_CONTENTS='5'
+	</select>
+
+		<!-- 자식책 조회 -->
+	<select id="getSeriseList" resultType="map">
+		SELECT B.BOOK_NUM,
+                 B.PARENT_NUM, 
+                 B.BOOK_TITLE, 
+                 B.BOOK_WRITER, 
+                 B.BOOK_PUBLISHER,
+		B.BOOK_PRICE,
+		B.BOOK_RENT,
+		to_char(BOOK_PUBLISH_DATE,'YYYY-MM-DD') BOOK_PUBLISH_DATE,
+		B.BOOK_PUBLISH_DATE,
+		B.BOOK_IMAGE,
+		B.BOOK_ATTACTMENT,
+		B.BOOK_CONTENTS,  
+		B.BOOK_AGE_LIMIT
+		FROM 	BOOK B
+		WHERE B.PARENT_NUM = #{bookNum}
+	</select>
+	
+		<!-- 조회수 --> 
+	<update id="updateBook">
+        <![CDATA[
+        UPDATE BOOK SET
+            BOOK_HIT = BOOK_HIT+1
+        WHERE BOOK_NUM = #{bookNum}
+        ]]>
+	</update>
+	
+		<!-- 도서 부모책 수정 -->
+	<update id="updateBook1">
+        <![CDATA[
+        UPDATE BOOK SET
+            BOOK_TITLE = #{bookTitle}, 
+            BOOK_WRITER = #{bookWriter},
+            BOOK_PUBLISHER = #{bookPublisher},
+            BOOK_PRICE = #{bookprice},
+            BOOK_RENT =  #{bookRent},
+            BOOK_PUBLISH_DATE = #{bookPublishDate},
+            BOOK_IMAGE = #{bookImage},
+            BOOK_ATTACTMENT =	#{bookAttactment},
+            BOOK_CONTENTS = #{bookContents},
+            BOOK_AGE_LIMIT =#{bookAgeLimit}
+        WHERE BOOK_NUM = #{bookNum}
+        ]]>
+	</update>
+	
+		<!-- 도서 자식책 수정 -->
+	<update id="updateBook2">
+        <![CDATA[
+         UPDATE BOOK SET
+            BOOK_TITLE = #{bookTitle}, 
+        	BOOK_PUBLISH_DATE = #{bookPublishDate},
+            BOOK_ATTACTMENT =	#{bookAttactment}
+        WHERE PARENT_NUM = #{bookNum}
+        ]]>
+	</update>
+	
+	<select id="getBookList1" resultType="map">
 		SELECT *
 		FROM 	BOOK b, GENRE2 g
 		WHERE b.BOOK_num = g.BOOK_num
@@ -85,12 +156,13 @@
 		and b.BOOK_PRICE = 0 
 		OR b.BOOK_RENT = 0
 		order by book_hit desc
+	<!--타이틀조회  -->
 	</select>
 		<select id="codetitle" resultMap="bookResult">
         <![CDATA[
         SELECT CODE_CONTENTS
         FROM GENRE
-        WHERE CODE_NUM = TO_NUMBER('${codeContents}','9999')  
+        WHERE CODE_NUM = TO_NUMBER('${codeContents}','999')  
         ]]>
 	</select>
 </mapper>
