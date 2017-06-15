@@ -252,7 +252,7 @@ body {
 		<!-- Modal -->
 		<div class="modal fade" id="show" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="width:1200px;">
 				<div class="modal-content"></div>
 			</div>
 		</div>
