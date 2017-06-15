@@ -21,7 +21,6 @@
 	<script src="${pageContext.request.contextPath}/css/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/css/fancybox/jquery.fancybox-1.3.1.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/css/fancybox/jquery.mousewheel-3.0.2.pack.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${pageContext.request.contextPath}/css/js-func.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/css/bootstrap.min.js"></script>
 <script type="text/javascript">
 jQuery.browser = {};
