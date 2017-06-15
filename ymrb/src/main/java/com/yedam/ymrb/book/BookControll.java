@@ -138,13 +138,13 @@ public class BookControll {
 		return "book/bookView";
 	}	
 	
-	//단건 조회
+	//도서상세보기 조회
 	@RequestMapping("/bookview.do")
 	public String bookView(Model model, BookVO vo){
 		bookService.updateBook(vo);
 		model.addAttribute("book", bookService.bookView(vo));
 		model.addAttribute("serise", bookService.getSeriseList(vo));	
-		return "book/bookView";
+		return "/popup/book/bookView";
 	}
 	// 대여 클릭시
 	 @RequestMapping(value="/rentBox.do" , method=RequestMethod.POST) 
