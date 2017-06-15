@@ -203,7 +203,7 @@ tr:nth-child(2n) .tddd {
 						// location.href='DeptControl.do?action=del&departmentId=${dept.departmentId}';
 						document.frm.submit();
 		     		}
-		     	}
+		     	}    
 		     </script>
 <form name="frm" action="TravelControl.do">
 	<input type="hidden" name="bookNum" value="${book.bookNum}">
