@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yedam.ymrb.buylist.BuyService;
@@ -147,8 +148,8 @@ public class BookControll {
 		return "/popup/book/bookView";
 	}
 	// 대여 클릭시
-	 @RequestMapping(value="/rentBox.do" , method=RequestMethod.POST) 
-	  public String rentBox (BookVO vo, BuyVO buyvo){
+	 @RequestMapping("/rentBox.do") 
+	  public @ResponseBody BookVO rentBox (BookVO vo, BuyVO buyvo){
 	   int[] booknu = vo.getChackBox();
 	   if(booknu != null){
 			for(int i=0; i<booknu.length; i++){		
@@ -159,7 +160,7 @@ public class BookControll {
 		   buyvo.setBookNum(vo.getBookNum());
 		   	buyService.insertBuy(buyvo);
 	   }
-	    return "redirect:/menu.do";
+	    return vo;
 	 }
 	// 구입 클릭시
 		 @RequestMapping(value="/buyBox.do" , method=RequestMethod.POST) 
@@ -174,7 +175,7 @@ public class BookControll {
 			   buyvo.setBookNum(vo.getBookNum());
 			buyService.insertBuy1(buyvo);
 		   } 
-		    return "redirect:/menu.do";
+		    return "redirect:/fantasy.do";
 		 }
 
 		//전체분류 화면

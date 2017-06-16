@@ -10,17 +10,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Insert title here</title>
-
-	<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/reader/css/verticalmenu2.css" media="screen">
+	<link href="${pageContext.request.contextPath}/css/bootstrap.min2.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/heroic-features.css" rel="stylesheet">
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/css/images/favicon.ico?cb=1" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css" media="all" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="all" />
 	<script src="${pageContext.request.contextPath}/css/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/css/jquery-ui-1.8.5.custom.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/css/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${pageContext.request.contextPath}/css/fancybox/jquery.fancybox-1.3.1.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${pageContext.request.contextPath}/css/fancybox/jquery.mousewheel-3.0.2.pack.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${pageContext.request.contextPath}/css/bootstrap.min.js"></script>
 <script type="text/javascript">
 jQuery.browser = {};

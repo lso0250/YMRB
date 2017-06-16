@@ -11,6 +11,9 @@
 <title></title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/style22.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/reader/css/verticalmenu2.css"
+	media="screen">
 <style>
 #container {
 	margin-left: 195px;
@@ -25,10 +28,6 @@
 .image {
 	margin-left: 200px;
 	float: left;
-}
-
-#ul1 {
-	
 }
 
 ul li {
@@ -86,17 +85,41 @@ tr:nth-child(2n) .tddd {
 	background-color: #00cc66;
 }
 </style>
-
+<script>
+	$(function() {
+		$("#rent").click(function() {
+			var param = $("#rentBox").serialize();
+			if (confirm("대여할까요?")) {
+				$.getJSON("rentBox.do", param, function(data) {
+					if (confirm("대여완료 대여목록으로 갈까요?")){
+						location.href="fantasy.do";
+					}
+					alert("대여가 완료 되었습니다.^^")
+				})}
+		});
+		
+		$("#cart").click(function() {
+			var param = $("#rentBox").serialize();
+			if (confirm("장바구니에 담을까요??")) {
+				$.getJSON("rentBox.do", param, function(data) {
+					if (confirm("담기완료 장바구니로 갈까요?")){
+						location.href="fantasy.do";
+					}
+					alert("대여가 완료 되었습니다.^^")
+				})}
+		});
+	})
+</script>
 </head>
 <body>
 	<script>
 		$(document).ready(function() {
-			if($(".age").text().equals("0")){
+			if ($(".age").text().equals("0")) {
 				$(".age").text() == "전체이용가";
-				
-			};
-			
-			
+
+			}
+			;
+
 		});
 	</script>
 	<br>
@@ -127,86 +150,85 @@ tr:nth-child(2n) .tddd {
 			<tr>
 				<td class="tdd">연령 제한</td>
 				<c:if test="${book.bookAgeLimit =='0' }">
-				<td class="tddd"><span class="age">전체이용가</span></td>
+					<td class="tddd"><span class="age">전체이용가</span></td>
 				</c:if>
 				<c:if test="${book.bookAgeLimit !='0' }">
-				<td class="tddd"><span class="age">${book.bookAgeLimit}세</span></td>
+					<td class="tddd"><span class="age">${book.bookAgeLimit}세</span></td>
 				</c:if>
-				
+
 			</tr>
 		</table>
 	</div>
 	<form>
-	<input type="submit" value="장바구니">
+		<input type="submit" value="장바구니">
 	</form>
+
 	<div id="container">
-	<form action="rentBox.do" method="post">
-		
-		
+
+		<form id="rentBox" name="rentBox" method="post">
 			<div class="pricing-table basic" style="width: 400px; height: 350px;">
 				<span class="table-head"> 대여 </span> <span class="price"> 권당
 					${book.bookRent}원 </span>
 				<div>
-					<input type="hidden" name="bookNum"value="${book.bookNum}">
+					<input type="hidden" name="bookNum" value="${book.bookNum}">
 					<c:forEach items="${serise}" var="seri">
-						
+
 						<span class="table-row"><input type="checkbox"
 							name="chackBox" value="${seri.BOOK_NUM }">${seri.BOOK_TITLE}</span>
 					</c:forEach>
 				</div>
-
-
 				<div class="purchase">
-					<input type="submit" class="buy" value="대여">
+					<input type="button" class="buy" id="rent" value="대여"> <input
+						type="button" class="buy" id="cart" value="장바구니담기"">
 				</div>
 			</div>
 		</form>
 
 
 
-<form action="buyBox.do" method="post">
-		<div class="pricing-table standard"
-			style="width: 400px; height: 350px;">
-			<span class="table-head"> 구매 </span> <span class="price"> 권당
-				${book.bookprice }원 </span>
+		<form action="buyBox.do" method="post">
+			<div class="pricing-table standard"
+				style="width: 400px; height: 350px;">
+				<span class="table-head"> 구매 </span> <span class="price"> 권당
+					${book.bookprice }원 </span>
 
-			<div class="chkclass">
-				<input type="hidden" name="bookNum"value="${book.bookNum}">
-				<c:forEach items="${serise}" var="seri">
-					<span class="table-row"><input type="checkbox"
-						name="chackBox" value="${seri.BOOK_NUM }">${seri.BOOK_TITLE}</span>
-				</c:forEach>
+				<div class="chkclass">
+					<input type="hidden" name="bookNum" value="${book.bookNum}">
+					<c:forEach items="${serise}" var="seri">
+						<span class="table-row"><input type="checkbox"
+							name="chackBox" value="${seri.BOOK_NUM }">${seri.BOOK_TITLE}</span>
+					</c:forEach>
 
+				</div>
+				<div class="purchase">
+					<input type="submit" class="buy" value="구입">
+				</div>
 			</div>
-			<div class="purchase">
-				<input type="submit" class="buy" value="구입">
-			</div>
-		</div>
 		</form>
-		</div>
-	
+	</div>
 
-	
+
+
 	<div class="soge">
 		<p style="color: white; font-size: 20px;">책 소개</p>
 		<hr style="width: 800px;">
 		<p style="padding: 20px;">${book.bookContents }</p>
 
 	</div>
-<form action="bookUpdateForm.do?bookNum=${book.bookNum}" method="post">
-<input type="submit" value="수정">
-</form>
-<input type="button" value="삭제">
- <script>
-		     	function delCheck() {
-		     		if(confirm("삭제할까요?")) {
-						// location.href='DeptControl.do?action=del&departmentId=${dept.departmentId}';
-						document.frm.submit();
-		     		}
-		     	}    
-		     </script>
-<form name="frm" action="TravelControl.do">
-	<input type="hidden" name="bookNum" value="${book.bookNum}">
-</form>		     
+	<form action="bookUpdateForm.do?bookNum=${book.bookNum}" method="post">
+		<input type="submit" value="수정">
+	</form>
+	<input type="button" value="삭제">
+	<script>
+		function delCheck() {
+			if (confirm("삭제할까요?")) {
+				// location.href='DeptControl.do?action=del&departmentId=${dept.departmentId}';
+				document.frm.submit();
+			}
+		}
+	</script>
+	<form name="frm" action="TravelControl.do">
+		<input type="hidden" name="bookNum" value="${book.bookNum}">
+	</form>
 </body>
 </html>

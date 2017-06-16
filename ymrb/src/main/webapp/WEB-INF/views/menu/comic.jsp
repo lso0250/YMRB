@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 
 </head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/reader/css/verticalmenu2.css" media="screen">
 <body>
     <!-- Page Content -->
     <div class="container">

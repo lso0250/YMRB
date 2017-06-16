@@ -6,7 +6,7 @@
 <head>
 <title>Free CSS template by ChocoTemplates.com</title>
 </head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/reader/css/verticalmenu2.css" media="screen">
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		var currentPosition = parseInt($("#floatMenu").css("top"));
@@ -65,7 +65,13 @@ jQuery.browser = {};
         jQuery.browser.version = RegExp.$1;
     }
 })();
+$(function(){
+	$('body').on('hidden.bs.modal', '.modal', function () {
+		  $(this).removeData('bs.modal');
+		});
+});
 </script>
+
 <style>
 #floatMenu {
 	color: white;
@@ -229,10 +235,10 @@ body {
 					<span class="drag-pointer">&nbsp;</span>
 					<!-- photo cover -->
 					<div class="photo-cover">
-						<a data-toggle="modal" data-target="#modal-testNew" role="button" data-backdrop="static" href="bookView.do?bookNum=${alstn2.BOOK_NUM}"><img
+						<a data-toggle="modal" data-target="#modal-testNew" role="button" href="bookView.do?bookNum=${alstn2.BOOK_NUM}"><a href="bookview.do?bookNum=${alstn2.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show"><img
 							src="./image/${alstn2.BOOK_IMAGE }" alt=""
-							style="width: 167px; height: 107px;" /></a>
-							<a href="bookview.do?bookNum=${alstn2.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">gtg</a>
+							style="width: 167px; height: 107px;" /></a></a>
+							
 							
 					</div>
 					<!-- end photo cover -->

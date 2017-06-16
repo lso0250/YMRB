@@ -7,11 +7,7 @@
 <head>
 <title>Insert title here</title>
 <style>
-div.container {
-	width: 100%;
-}
-
-header, footer {
+/* header, footer {
 	padding: 1em;
 	color: white;
 	clear: left;
@@ -37,7 +33,7 @@ article {
 	margin-left: 170px;
 	padding: 1em;
 	overflow: hidden;
-}
+} */
 </style>
 </head>
 <body>
