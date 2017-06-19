@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class BookVO {
+public class BookVO extends com.yedam.ymrb.util.SearchVO{
 	private int bookNum; 
 	private int parentNum;
 	private int childNum;
@@ -26,12 +26,61 @@ public class BookVO {
 	private String[] dateserise;
 	private MultipartFile[] fileserise;
 	private String codeContents;
+	private String codeContents2;
+	private String codeContents3;
+	private String codeContents4;
+	private String codeContents5;
+	private String codeContents6;
 	private String code_contents;
 	private String code_contents2;
 	private Date bookDate;
 	private int bookHit;
 	private int [] chackBox;
+	private String key;
+	private String keyword;
 
+	public String getCodeContents2() {
+		return codeContents2;
+	}
+	public void setCodeContents2(String codeContents2) {
+		this.codeContents2 = codeContents2;
+	}
+	public String getCodeContents3() {
+		return codeContents3;
+	}
+	public void setCodeContents3(String codeContents3) {
+		this.codeContents3 = codeContents3;
+	}
+	public String getCodeContents4() {
+		return codeContents4;
+	}
+	public void setCodeContents4(String codeContents4) {
+		this.codeContents4 = codeContents4;
+	}
+	public String getCodeContents5() {
+		return codeContents5;
+	}
+	public void setCodeContents5(String codeContents5) {
+		this.codeContents5 = codeContents5;
+	}
+	public String getCodeContents6() {
+		return codeContents6;
+	}
+	public void setCodeContents6(String codeContents6) {
+		this.codeContents6 = codeContents6;
+	}
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public String getCodeContents() {
 		return codeContents;
 	}

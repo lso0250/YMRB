@@ -52,7 +52,7 @@
 	
 	}
 	.first{
-			margin-left:900px;
+	
 		margin-top:150px;
 		border:1px solid gray;
 		width:800px;
@@ -73,22 +73,22 @@
 		
 		
 	}
-	a {text-decoration: none;
+	.aa {text-decoration: none;
     color:black;
     font-size:20px;
   
     }
     .buylist{
-    	margin-left:900px;
+    
     	margin-top:80px;
     	width:900px;
     }
     .rentlist{
-    	margin-left:900px;
+    	
     	margin-top:150px;
     	width:900px;
     }
-    .table{
+    .table2{
     		font-size:20px;
  			display:inline-block;
  			text-align:center;
@@ -120,7 +120,29 @@
 		<b>YMBR 포인트</b><br>
 		<b style="font-size:20px;color:#669999">0원</b>
 		</a>
+	</div>
+		<div class="two" id="point" style="margin-left:10px;">
+		<a href="cash.jsp" class="aa" >
+		<img src="img/point.JPG" style="width:100px;height:60px;"><br>
+		<b>현재 대여중인 권수</b><br>
+		<b style="font-size:20px;color:#669999">0권</b>
+		</a>
 		
+	</div>
+		<div class="two" id="point" style="margin-left:10px;">
+		<a href="cash.jsp" class="aa" >
+		<img src="img/point.JPG" style="width:100px;height:60px;"><br>
+		<b>구매한책</b><br>
+		<b style="font-size:20px;color:#669999">0권</b>
+		</a>
+	</div>
+	
+		<div class="two" id="point" style="margin-left:10px;">
+		<a href="cash.jsp" class="aa" >
+		<img src="img/point.JPG" style="width:100px;height:60px;"><br>
+		<b>장바구니</b><br>
+		<b style="font-size:20px;color:#669999">　</b>
+		</a>
 	</div>
 	
 	<div>
@@ -128,7 +150,6 @@
 				margin-top:0px; margin-left:20px; border-radius: 4px; background-color: #669999; color:white;" >
 	</div>
 	
-
 
 </div>
 <div class="buylist">
@@ -148,7 +169,7 @@
  	
 	
 
-<div class="table">
+<div class="table2">
 	<table>
 		<tr>
 			
@@ -167,7 +188,7 @@
 	
 
 </div> 
-<div class="table">
+<div class="table2">
 	<table>
 		<tr>
 		
@@ -204,7 +225,7 @@
  	
 	
 
-<div class="table">
+<div class="table2">
 	<table>
 		<tr>
 			
@@ -223,7 +244,7 @@
 	
 
 </div> 
-<div class="table">
+<div class="table2">
 	<table>
 		<tr>
 		
@@ -242,7 +263,7 @@
 	
 
 </div> 
-<div class="table">
+<div class="table2">
 	<table>
 		<tr>
 		
@@ -261,7 +282,7 @@
 	
 
 </div> 
-<div class="table">
+<div class="table2">
 	<table>
 		<tr>
 		
@@ -280,7 +301,7 @@
 	
 
 </div> 
-<div class="table">
+<div class="table2">
 	<table>
 		<tr>
 		

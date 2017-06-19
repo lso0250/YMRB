@@ -2,8 +2,8 @@ package com.yedam.ymrb.cart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.yedam.ymrb.buylist.BuyVO;
 
-import com.yedam.ymrb.user.UserService;
 
 @Service("cartService")
 public class CartServiceImpl implements CartService {
@@ -13,4 +13,9 @@ public class CartServiceImpl implements CartService {
 	public void insertCart(CartVO vo){
 		cartDAO.insertCart(vo);
 	}
+	public void cartInsert(BuyVO vo) {
+    	cartDAO.cartInsert(vo);
+       
+
+    }
 }

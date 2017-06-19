@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +59,13 @@
 		});
 	});
 </script>
+<script>
+/* pagination 페이지 링크 function */ 
+function fn_egov_link_page(pageNo){ 
+document.listForm.pageIndex.value = pageNo; 
+document.listForm.action = "<c:url value='/fulllist.do'/>"; 
+   document.listForm.submit(); 
+}</script>
 <style>
 #floatMenu {
 	color: white;
@@ -99,7 +107,9 @@ body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 </style>
-     
+<form name="listForm">
+<input type="hidden" name="pageIndex">
+<input type="hidden" name="codeContents" value="${bookVO.codeContents }">
 <div id="floatMenu">
 	<ul id="nav">
 		<li><a id='im1'><img src="css/images/insert.jpg" id="1"
@@ -163,7 +173,7 @@ body {
 </div>
 <div class="shell">
 	<div class="title">
-	<h2>  ${getBookList[0].BOOK_TITLE}</h2>
+	<h2>  ${book.codeContents}</h2>
 	<a href="menulist.do?codeContents=${getBookList2[0].CODE_CONTENTS2}"><input type="button" value="홈"></a>
 	<a href="freebook.do?codeContents=${getBookList2[0].CODE_CONTENTS2}"><input type="button" value="무료책"></a>
 	<a href="fulllist.do?codeContents=${getBookList2[0].CODE_CONTENTS2}"><input type="button" value="전체"></a>
@@ -195,7 +205,8 @@ body {
 	</div>
 	<!-- end main -->
 </div>
-
+</form>
+<my:paging paginationInfo="${paginationInfo }"></my:paging>
 </body>
 
 </html>

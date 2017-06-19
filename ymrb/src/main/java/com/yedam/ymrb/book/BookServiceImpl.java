@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yedam.ymrb.board.BoardVO;
+
 
 
 
@@ -15,11 +17,10 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	private BookDAOMybatis bookDAO;
     
+
     public void insertBook(BookVO vo) {
     	bookDAO.insertBook(vo);
     }
-    
-    
     public BookVO bookView(BookVO vo) {  	
         return bookDAO.bookView(vo);
     }
@@ -43,7 +44,7 @@ public class BookServiceImpl implements BookService {
         return bookDAO.codetitle(vo);
     }
     public List<BookVO> getBookList1(BookVO vo) {
-        return bookDAO.getBookList(vo);
+        return bookDAO.getBookList1(vo);
     }
     public List<BookVO> getBookList2(BookVO vo) {
         return bookDAO.getBookList2(vo);
@@ -54,5 +55,19 @@ public class BookServiceImpl implements BookService {
     public List<BookVO> getBookList4(BookVO vo) {
         return bookDAO.getBookList4(vo);
     }
-    
+	public List<BookVO> serchResult(BookVO vo){
+		return bookDAO.serchResult(vo);
+	}
+
+	@Override
+	public int serchResultCount(BookVO vo) {
+		// TODO Auto-generated method stub
+		return bookDAO.serchResultCount(vo);
+	}
+	@Override
+	public int getBookList1Count(BookVO vo) {
+		// TODO Auto-generated method stub
+		return bookDAO.getBookList1Count(vo);
+	}
+
 }

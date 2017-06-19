@@ -29,6 +29,13 @@
         ]]>
 	</delete>
 
-
+	<!-- 장바구니 클릭시 -->
+	<insert id="cartInsert" parameterType="buylist">
+        <selectKey keyProperty="cartNum" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(CART_NUM), 0) + 1 FROM CART
+		</selectKey>  
+        INSERT INTO CART(CART_NUM, BOOK_NUM, MEM_NUM)  
+        VALUES(#{cartNum}, #{bookNum},1)
+	</insert>
 
 </mapper>

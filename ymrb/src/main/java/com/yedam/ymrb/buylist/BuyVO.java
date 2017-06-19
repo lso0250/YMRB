@@ -11,6 +11,14 @@ public class BuyVO {
 	private String buyDate;
 	private int bookNum;
 	private int rentNum;
+	private int cartNum;
+	
+	public int getCartNum() {
+		return cartNum;
+	}
+	public void setCartNum(int cartNum) {
+		this.cartNum = cartNum;
+	}
 	public String getRentListDate() {
 		return rentListDate;
 	}

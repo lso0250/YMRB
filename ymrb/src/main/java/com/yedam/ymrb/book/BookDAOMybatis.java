@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.ymrb.board.BoardVO;
+
 @Repository
 public class BookDAOMybatis {
 	
@@ -42,7 +44,7 @@ public class BookDAOMybatis {
 	}
 	public List<BookVO> getBookList1(BookVO vo) {
 	      
-        return mybatis.selectList("BookDAO.getBookList", vo);
+        return mybatis.selectList("BookDAO.getBookList1", vo);
     }
 	public List<BookVO> getBookList2(BookVO vo) {
 	      
@@ -55,5 +57,15 @@ public class BookDAOMybatis {
 	public List<BookVO> getBookList4(BookVO vo) {
 	      
         return mybatis.selectList("BookDAO.getBookList4", vo);
+    }
+	public List<BookVO> serchResult(BookVO vo) {
+		return mybatis.selectList("BookDAO.serchResult", vo);
+	}
+
+    public int serchResultCount(BookVO vo){
+    	return mybatis.selectOne("BookDAO.serchResultCount", vo);
+    }
+    public int getBookList1Count(BookVO vo){
+    	return mybatis.selectOne("BookDAO.getBookList1Count", vo);
     }
 }

@@ -4,6 +4,7 @@ public class CartVO {
 	private int cart_num;
 	private int book_num;
 	private int mem_num;
+
 	public int getCart_num() {
 		return cart_num;
 	}

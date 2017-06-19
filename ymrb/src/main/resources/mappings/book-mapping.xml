@@ -8,38 +8,40 @@
 	<!-- resultMap은 결과를 매핑하는것이다. 쿼리 결과가 조인구문을 포함할때는 검색 결과를 하나의 자바객체로 매핑할 수 없다. 
 		이럴때 매핑해줘야함 -->
 
-<resultMap id="bookResult" type="book">
+	<resultMap id="bookResult" type="book">
 		<id property="bookNum" column="BOOK_NUM" />
 		<result property="parentNum" column="PARENT_NUM" />
 		<result property="bookTitle" column="BOOK_TITLE" />
 		<result property="bookWriter" column="BOOK_WRITER" />
 		<result property="bookPublisher" column="BOOK_PUBLISHER" />
-		<result property="bookprice" column="BOOK_PRICE"/>
-		<result property="bookRent" column="BOOK_RENT"/>
-		<result property="bookPublishDate" column="BOOK_PUBLISH_DATE"/>
-		<result property="bookImage" column="BOOK_IMAGE"/>
-		<result property="bookAttactment" column="BOOK_ATTACTMENT"/>
-		<result property="bookContents" column="BOOK_CONTENTS"/>
-		<result property="bookAgeLimit" column="BOOK_AGE_LIMIT"/>
-		<result property="code_contents" column="CODE_CONTENTS"/>
-		<result property="codeContents" column="CODE_CONTENTS"/>
-		<result property="bookContents" column="BOOK_CONTENTS"/>
-		<result property="code_contents2" column="CODE_CONTENTS2"/> 
-	</resultMap> 
-	
+		<result property="bookprice" column="BOOK_PRICE" />
+		<result property="bookRent" column="BOOK_RENT" />
+		<result property="bookPublishDate" column="BOOK_PUBLISH_DATE" />
+		<result property="bookImage" column="BOOK_IMAGE" />
+		<result property="bookAttactment" column="BOOK_ATTACTMENT" />
+		<result property="bookContents" column="BOOK_CONTENTS" />
+		<result property="bookAgeLimit" column="BOOK_AGE_LIMIT" />
+		<result property="code_contents" column="CODE_CONTENTS" />
+		<result property="codeContents" column="CODE_CONTENTS" />
+		<result property="bookContents" column="BOOK_CONTENTS" />
+		<result property="code_contents2" column="CODE_CONTENTS2" />
+	</resultMap>
+
 	<insert id="insertBook" parameterType="book"> <!-- 부모책 추가 -->
-        <selectKey keyProperty="bookNum" resultType="int" order="BEFORE">
+		<selectKey keyProperty="bookNum" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(BOOK_NUM), 0) + 1 FROM BOOK
-		</selectKey>  
-        INSERT INTO BOOK(BOOK_NUM, PARENT_NUM, BOOK_TITLE, BOOK_WRITER, BOOK_PUBLISHER,
-        				  BOOK_PRICE,BOOK_RENT,BOOK_PUBLISH_DATE,BOOK_IMAGE,BOOK_ATTACTMENT,BOOK_CONTENTS,
-        				  BOOK_AGE_LIMIT,BOOK_HIT)  
-        VALUES(#{bookNum}, #{parentNum},#{bookTitle},#{bookWriter},
-        			#{bookPublisher},#{bookprice},#{bookRent},#{bookPublishDate},#{bookImage},#{bookAttactment}
-        				,#{bookContents},#{bookAgeLimit},0)
+		</selectKey>
+		INSERT INTO BOOK(BOOK_NUM, PARENT_NUM, BOOK_TITLE, BOOK_WRITER,
+		BOOK_PUBLISHER,
+		BOOK_PRICE,BOOK_RENT,BOOK_PUBLISH_DATE,BOOK_IMAGE,BOOK_ATTACTMENT,BOOK_CONTENTS,
+		BOOK_AGE_LIMIT,BOOK_HIT)
+		VALUES(#{bookNum},
+		#{parentNum},#{bookTitle},#{bookWriter},
+		#{bookPublisher},#{bookprice},#{bookRent},#{bookPublishDate},#{bookImage},#{bookAttactment}
+		,#{bookContents},#{bookAgeLimit},0)
 	</insert>
-	
-		<!-- 상세보기 -->
+
+	<!-- 상세보기 -->
 	<select id="bookView" resultMap="bookResult">
         <![CDATA[
           SELECT B.BOOK_NUM,
@@ -61,35 +63,38 @@
   		WHERE B.BOOK_NUM = #{bookNum}
         ]]>
 	</select>
-	
+
 	<!-- 부모 조회 -->
 	<select id="getBookList" resultType="map">
 		SELECT *
-		FROM 	BOOK b, GENRE2 g
+		FROM BOOK b, GENRE2
+		g
 		WHERE b.BOOK_num = g.BOOK_num
 		and g.CODE_CONTENTS='5'
 	</select>
 
-		<!-- 자식책 조회 -->
+	<!-- 자식책 조회 -->
 	<select id="getSeriseList" resultType="map">
 		SELECT B.BOOK_NUM,
-                 B.PARENT_NUM, 
-                 B.BOOK_TITLE, 
-                 B.BOOK_WRITER, 
-                 B.BOOK_PUBLISHER,
+		B.PARENT_NUM,
+		B.BOOK_TITLE,
+		B.BOOK_WRITER,
+		B.BOOK_PUBLISHER,
 		B.BOOK_PRICE,
 		B.BOOK_RENT,
-		to_char(BOOK_PUBLISH_DATE,'YYYY-MM-DD') BOOK_PUBLISH_DATE,
+		to_char(BOOK_PUBLISH_DATE,'YYYY-MM-DD')
+		BOOK_PUBLISH_DATE,
 		B.BOOK_PUBLISH_DATE,
 		B.BOOK_IMAGE,
 		B.BOOK_ATTACTMENT,
-		B.BOOK_CONTENTS,  
+		B.BOOK_CONTENTS,
 		B.BOOK_AGE_LIMIT
-		FROM 	BOOK B
-		WHERE B.PARENT_NUM = #{bookNum}
+		FROM BOOK B
+		WHERE B.PARENT_NUM =
+		#{bookNum}
 	</select>
-	
-		<!-- 조회수 --> 
+
+	<!-- 조회수 -->
 	<update id="updateBook">
         <![CDATA[
         UPDATE BOOK SET
@@ -97,8 +102,8 @@
         WHERE BOOK_NUM = #{bookNum}
         ]]>
 	</update>
-	
-		<!-- 도서 부모책 수정 -->
+
+	<!-- 도서 부모책 수정 -->
 	<update id="updateBook1">
         <![CDATA[
         UPDATE BOOK SET
@@ -115,8 +120,8 @@
         WHERE BOOK_NUM = #{bookNum}
         ]]>
 	</update>
-	
-		<!-- 도서 자식책 수정 -->
+
+	<!-- 도서 자식책 수정 -->
 	<update id="updateBook2">
         <![CDATA[
          UPDATE BOOK SET
@@ -126,45 +131,118 @@
         WHERE PARENT_NUM = #{bookNum}
         ]]>
 	</update>
-	
-	<select id="getBookList1" resultType="map">
+
+
+	<select id="getBookList2" resultType="map">
 		SELECT *
-		FROM 	BOOK b, GENRE2 g
+		FROM BOOK b, GENRE2 g
 		WHERE b.BOOK_num = g.BOOK_num
-		and CODE_CONTENTS2=#{codeContents}
-	</select>
-		<select id="getBookList2" resultType="map">
-		SELECT *
-		FROM 	BOOK b, GENRE2 g
-		WHERE b.BOOK_num = g.BOOK_num
-		and CODE_CONTENTS2=#{codeContents}
+		<if test="codeContents != null and codeContents != '' ">
+			and CODE_CONTENTS2=#{codeContents}
+		</if>
+		<if test="codeContents2 != null and codeContents != '' ">
+			or CODE_CONTENTS2=#{codeContents2}
+		</if>
+		<if test="codeContents3 != null and codeContents != '' ">
+			or CODE_CONTENTS2=#{codeContents3}
+		</if>
+		<if test="codeContents4 != null and codeContents != '' ">
+			or CODE_CONTENTS2=#{codeContents4}
+		</if>
+		<if test="codeContents5 != null and codeContents != '' ">
+			or CODE_CONTENTS2=#{codeContents5}
+		</if>
+		<if test="codeContents6 != null and codeContents != '' ">
+			or CODE_CONTENTS2=#{codeContents6}
+		</if>
 		order by book_hit desc
 	</select>
 	<select id="getBookList3" resultType="map">
 		SELECT *
-		FROM 	BOOK b, GENRE2 g
+		FROM BOOK b, GENRE2 g
 		WHERE b.BOOK_num = g.BOOK_num
-		and CODE_CONTENTS2=#{codeContents}
-		and to_char(b.BOOK_PUBLISH_DATE,'YYYYMMDD') > to_char(add_months(sysdate,-6),'YYYYMMDD')
+		<if test="codeContents != null and codeContents != '' ">
+			and CODE_CONTENTS2=#{codeContents}
+		</if>
+		and to_char(b.BOOK_PUBLISH_DATE,'YYYYMMDD') >
+		to_char(add_months(sysdate,-6),'YYYYMMDD')
 		order by book_hit desc
 	</select>
 	<select id="getBookList4" resultType="map">
 		SELECT *
-		FROM 	BOOK b, GENRE2 g
+		FROM BOOK b, GENRE2 g
 		WHERE b.BOOK_num = g.BOOK_num
-		and CODE_CONTENTS2=#{codeContents}
-		and b.BOOK_PRICE = 0 
+		<if test="codeContents != null and codeContents != '' ">
+			and CODE_CONTENTS2=#{codeContents}
+		</if>
+		and b.BOOK_PRICE = 0
 		OR b.BOOK_RENT = 0
 		order by book_hit desc
-	<!--타이틀조회  -->
 	</select>
-		<select id="codetitle" resultMap="bookResult">
+	<!--타이틀조회 -->
+	<select id="codetitle" resultMap="bookResult">
         <![CDATA[
         SELECT CODE_CONTENTS
         FROM GENRE
         WHERE CODE_NUM = TO_NUMBER('${codeContents}','999')  
         ]]>
 	</select>
+
+	<select id="serchResult" resultMap="bookResult">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+		SELECT *
+		FROM BOOK
+		WHERE book_num is not null
+		<if test="key.equals('저자')">
+			AND BOOK_WRITER like '%${keyword}%'
+		</if>
+		<if test="key.equals('제목')">
+			AND BOOK_TITLE like '%${keyword}%'
+		</if>
+		order by book_hit desc
+				<![CDATA[					
+	) A WHERE ROWNUM <= #{lastIndex}
+)WHERE RNUM > #{firstIndex}
+]]>
+	</select>
+	<select id="serchResultCount" resultType="int">
+		SELECT count(*)
+		FROM BOOK
+		WHERE book_num is not null
+		<if test="key.equals('저자')">
+			AND BOOK_WRITER like '%${keyword}%'
+		</if>
+		<if test="key.equals('제목')">
+			AND BOOK_TITLE like '%${keyword}%'
+		</if>
+	</select>
+
+	<select id="getBookList1" resultType="map">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+		SELECT *
+		FROM BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		<if test="codeContents != null and codeContents != '' ">
+			and g.CODE_CONTENTS2=#{codeContents}
+		</if>
+						<![CDATA[					
+	) A WHERE ROWNUM <= #{lastIndex}
+)WHERE RNUM > #{firstIndex}
+]]>
+	</select>
+
+<select id="getBookList1Count" resultType="int">
+		SELECT count(*)
+		FROM BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		<if test="codeContents != null and codeContents != '' ">
+			and g.CODE_CONTENTS2=#{codeContents}
+		</if>
+	</select>
+
+
 </mapper>
 
  

@@ -18,11 +18,7 @@
         				  RENT_START_DATE,RENT_LAST_DATE)  
         VALUES(#{rentNum}, #{bookNum},sysdate,1,
         			1,sysdate,sysdate+10)
-       
-
-
 	</insert>
-	
 	<!-- 구입 클릭시 -->
 	<insert id="insertBuy1" parameterType="buylist">
         <selectKey keyProperty="rentNum" resultType="int" order="BEFORE">
@@ -32,9 +28,6 @@
         				  RENT_START_DATE,RENT_LAST_DATE)  
         VALUES(#{rentNum}, #{bookNum},sysdate,2,
         			1,sysdate,sysdate+10)
-       
-
-
 	</insert>
 	
 

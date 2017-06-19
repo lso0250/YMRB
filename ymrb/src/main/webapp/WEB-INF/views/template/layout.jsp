@@ -56,23 +56,27 @@ margin-left: 100px;}
 								class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="#"> Y M R B</a>
+						<form action="serch.do" name="frm" method="post">
+							<select name="key" name="speed" id="speed">
+								<option <c:if test="${key =='저자' }">selected="selected"</c:if>>저자</option>
+								<option <c:if test="${key =='제목' }">selected="selected"</c:if>>제목</option>
+							</select> <input type="text" name="keyword" value="${keyword }"> 
+							<input type="submit" value="검색" /><br>
+						</form>
 					</div>
 					<br> <br>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li id="l1"><a href="menu.do?codeContents=9"> &nbsp;&nbsp;&nbsp;&nbsp;전체분류</a></li>
-							<li><a href="comic.do"> &nbsp;&nbsp;&nbsp;만화</a></li>
-							<li><a href="romance.do">&nbsp;&nbsp;&nbsp;로맨스 </a></li>
+							<li id="l1"><a href="menu.do?"> &nbsp;&nbsp;&nbsp;&nbsp;전체분류</a></li>
+							<li><a href="romance.do?">&nbsp;&nbsp;&nbsp;로맨스 </a></li>
 							<li><a href="fantasy.do">&nbsp;&nbsp;&nbsp;판타지 </a></li>
-							<li><a href="test.do">&nbsp;&nbsp;&nbsp;갸시팔 </a></li>
-							<li><a href="getBoardList.do"> &nbsp;&nbsp;게시판</a></li>
-							<li><a href="getPBoardList.do"> &nbsp;&nbsp;연재게시판</a></li>
+							<li><a href="comic.do"> &nbsp;&nbsp;&nbsp;만화</a></li>
+							<li><a href="getBoardList.do"> &nbsp;&nbsp;커뮤니티</a></li>
 							<c:if test="${login.mem_id == null }">
 								<li><a  href="" onclick="window.open('${pageContext.request.contextPath}/login.do','signup','width=300')"> &nbsp;&nbsp;로그인 </a></li>
-								
-								<li><a data-toggle="modal" data-target="#modal-testNew"  role="button" data-backdrop="static" href="${pageContext.request.contextPath}/login.do" > &nbsp;&nbsp;로그인 </a></li>
+								<li><a data-toggle="modal" data-target="#modal-testNew"  role="button" data-backdrop="static" href="${pageContext.request.contextPath}/login.do" ></a></li>
 								<a href="login.do" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
   								Launch demo modal
 								</a>
@@ -81,7 +85,7 @@ margin-left: 100px;}
 							<c:if test="${login.mem_id != null }">
 								<li id="l1"><a href="comic.do"> &nbsp;&nbsp;&nbsp;&nbsp;${login.mem_nic}님- 보유 포인트 : ${login.mem_point} </a></li>
 								<li><a href="logout.do" > &nbsp;&nbsp;로그아웃  </a></li>
-								<li><a href="comic.do"> &nbsp;&nbsp;마이페이지</a></li>
+								<li><a href="mypage.do"> &nbsp;&nbsp;마이페이지</a></li>
 								<c:if test="${login.mem_id == 'admin' }">
 									<li><a href="getUserList.do"> &nbsp;&nbsp;관리자 페이지</a></li>
 								</c:if>
