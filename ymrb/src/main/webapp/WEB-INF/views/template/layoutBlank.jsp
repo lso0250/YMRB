@@ -6,6 +6,11 @@
 <html>
 <head>
 <title>Insert title here</title>
+
+	<script src="${pageContext.request.contextPath}/css/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/jquery-ui-1.8.5.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/css/bootstrap.min.js"></script>
 <style>
 /* header, footer {
 	padding: 1em;
@@ -40,7 +45,7 @@ article {
 	<!-- include_directive.jsp -->
 	<div class="container">
 
-			<tiles:insertAttribute name="content"/>
+	<tiles:insertAttribute name="content"/>
 	
 	</div>
 </body>

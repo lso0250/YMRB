@@ -163,9 +163,9 @@ body {
 <div class="shell">
 	<div class="title">
 	<h2>  ${getBookList[0].BOOK_TITLE}</h2>
-	<a href="menulist.do?codeContents=${getBookList2[0].CODE_CONTENTS2}"><input type="button" value="홈"></a>
-	<a href="freebook.do?codeContents=${getBookList2[0].CODE_CONTENTS2}"><input type="button" value="무료책"></a>
-	<a href="fulllist.do?codeContents=${getBookList2[0].CODE_CONTENTS2}"><input type="button" value="전체"></a>
+	<a href="menulist.do?codeContents=${getBookList[0].CODE_CONTENTS2}"><input type="button" value="홈"></a>
+	<a href="freebook.do?codeContents=${getBookList[0].CODE_CONTENTS2}"><input type="button" value="무료책"></a>
+	<a href="fulllist.do?codeContents=${getBookList[0].CODE_CONTENTS2}"><input type="button" value="전체"></a>
 	</div>
 	<hr>
 	<div id="main">
@@ -176,9 +176,10 @@ body {
 					<span class="drag-pointer">&nbsp;</span>
 					<!-- photo cover -->
 					<div class="photo-cover">
-						<a href="css/images/golden-gate-big.jpg" class="big-image"><img
-							src="./image/${alstn.BOOK_IMAGE }" alt=""
-							style="width: 167px; height: 107px;" /></a>
+<a data-toggle="modal" data-target="#modal-testNew" role="button" href="bookView.do?bookNum=${alstn.BOOK_NUM}">
+<a href="bookview.do?bookNum=${alstn.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">
+<img src="./image/${alstn.BOOK_IMAGE }" alt=""	style="width: 167px; height: 107px;" /></a>
+</a>	
 					</div>
 					<!-- end photo cover -->
 
@@ -194,7 +195,13 @@ body {
 	</div>
 	<!-- end main -->
 </div>
-
+		<!-- Modal -->
+		<div class="modal fade" id="show" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:1200px;">
+				<div class="modal-content"></div>
+			</div>
+		</div>
 </body>
 
 </html>

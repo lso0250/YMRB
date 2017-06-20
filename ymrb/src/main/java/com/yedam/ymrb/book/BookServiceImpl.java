@@ -55,14 +55,14 @@ public class BookServiceImpl implements BookService {
     public List<BookVO> getBookList4(BookVO vo) {
         return bookDAO.getBookList4(vo);
     }
-	public List<BookVO> serchResult(BookVO vo){
-		return bookDAO.serchResult(vo);
+	public List<BookVO> searchResult(BookVO vo){
+		return bookDAO.searchResult(vo);
 	}
 
 	@Override
-	public int serchResultCount(BookVO vo) {
+	public int searchResultCount(BookVO vo) {
 		// TODO Auto-generated method stub
-		return bookDAO.serchResultCount(vo);
+		return bookDAO.searchResultCount(vo);
 	}
 	@Override
 	public int getBookList1Count(BookVO vo) {

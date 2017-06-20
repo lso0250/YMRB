@@ -253,9 +253,10 @@ body {
 					<span class="drag-pointer">&nbsp;</span>
 					<!-- photo cover -->
 					<div class="photo-cover">
-						<a href="css/images/golden-gate-big.jpg" class="big-image"><img
-							src="./image/${alstn2.BOOK_IMAGE }" alt=""
-							style="width: 167px; height: 107px;" /></a>
+<a data-toggle="modal" data-target="#modal-testNew" role="button" href="bookView.do?bookNum=${alstn2.BOOK_NUM}">
+<a href="bookview.do?bookNum=${alstn2.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">
+<img src="./image/${alstn2.BOOK_IMAGE }" alt=""	style="width: 167px; height: 107px;" /></a>
+</a>
 					</div>
 					<!-- end photo cover -->
 
@@ -329,9 +330,10 @@ body {
 					<span class="drag-pointer">&nbsp;</span>
 					<!-- photo cover -->
 					<div class="photo-cover">
-						<a href="css/images/golden-gate-big.jpg" class="big-image"><img
-							src="./image/${alstn3.BOOK_IMAGE }" alt=""
-							style="width: 167px; height: 107px;" /></a>
+<a data-toggle="modal" data-target="#modal-testNew" role="button" href="bookView.do?bookNum=${alstn3.BOOK_NUM}">
+<a href="bookview.do?bookNum=${alstn3.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">
+<img src="./image/${alstn3.BOOK_IMAGE }" alt=""	style="width: 167px; height: 107px;" /></a>
+</a>	
 					</div>
 					<!-- end photo cover -->
 
@@ -347,6 +349,13 @@ body {
 	</div>
 	<!-- end main -->
 </div>
+		<!-- Modal -->
+		<div class="modal fade" id="show" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:1200px;">
+				<div class="modal-content"></div>
+			</div>
+		</div>
 <div class="shell">
 	<div class="title">
 	${book.codeContents }인기 무료
@@ -405,9 +414,10 @@ body {
 					<span class="drag-pointer">&nbsp;</span>
 					<!-- photo cover -->
 					<div class="photo-cover">
-						<a href="css/images/golden-gate-big.jpg" class="big-image"><img
-							src="./image/${alstn4.BOOK_IMAGE }" alt=""
-							style="width: 167px; height: 107px;" /></a>
+<a data-toggle="modal" data-target="#modal-testNew" role="button" href="bookView.do?bookNum=${alstn4.BOOK_NUM}">
+<a href="bookview.do?bookNum=${alstn4.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">
+<img src="./image/${alstn4.BOOK_IMAGE }" alt=""	style="width: 167px; height: 107px;" /></a>
+</a>	
 					</div>
 					<!-- end photo cover -->
 

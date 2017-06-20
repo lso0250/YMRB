@@ -26,9 +26,9 @@ public interface BookService {
 	List<BookVO> getBookList2(BookVO vo);
 	List<BookVO> getBookList3(BookVO vo);
 	List<BookVO> getBookList4(BookVO vo);
-	List<BookVO> serchResult(BookVO vo);
+	List<BookVO> searchResult(BookVO vo);
 	BookVO codetitle(BookVO vo);
 	//카운트 조회
-	int serchResultCount(BookVO vo);
+	int searchResultCount(BookVO vo);
 	int getBookList1Count(BookVO vo);
 }

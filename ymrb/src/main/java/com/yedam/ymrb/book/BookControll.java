@@ -199,8 +199,6 @@ public class BookControll {
 		return vo;
 	}
 
-
-
 	// 로맨스 화면
 	@RequestMapping("/romance.do")
 	public String getComicList(BookVO vo, Model model) throws Exception {
@@ -215,7 +213,7 @@ public class BookControll {
 		model.addAttribute("book", bookService.codetitle(vo));
 		return "menu/romance";
 	}
-	
+
 	// 판타지 화면
 	@RequestMapping("/fantasy.do")
 	public String getFantasyList(BookVO vo, Model model) throws Exception {
@@ -230,6 +228,7 @@ public class BookControll {
 		model.addAttribute("book", bookService.codetitle(vo));
 		return "menu/fantasy";
 	}
+
 	// 만화 화면
 	@RequestMapping("/comic.do")
 	public String getRomanceList(BookVO vo, Model model) throws Exception {
@@ -242,7 +241,8 @@ public class BookControll {
 		model.addAttribute("getBookList2", bookService.getBookList2(vo));
 		model.addAttribute("book", bookService.codetitle(vo));
 		return "menu/comic";
-	}	
+	}
+
 	// 전체분류 화면
 	@RequestMapping("/menu.do")
 	public String getBookList(BookVO vo, Model model) throws Exception {
@@ -326,18 +326,18 @@ public class BookControll {
 	// 분야,장르별 전체목록 조회
 	@RequestMapping("/fulllist.do")
 	public String getFullList(BookVO vo, Model model) throws Exception {
-		//페이징처리 
-		PaginationInfo paginationInfo = new PaginationInfo(); 
-		paginationInfo.setCurrentPageNo(vo.getPageIndex()); 
-		paginationInfo.setRecordCountPerPage(vo.getPageUnit()); 
+		// 페이징처리
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(vo.getPageIndex());
+		paginationInfo.setRecordCountPerPage(vo.getPageUnit());
 		paginationInfo.setPageSize(vo.getPageSize());
-		vo.setFirstIndex(paginationInfo.getFirstRecordIndex()); 
-		vo.setLastIndex(paginationInfo.getLastRecordIndex()); 
+		vo.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		vo.setLastIndex(paginationInfo.getLastRecordIndex());
 		paginationInfo.setTotalRecordCount(bookService.getBookList1Count(vo));
-		model.addAttribute("paginationInfo", paginationInfo); 
-		//목록조회
+		model.addAttribute("paginationInfo", paginationInfo);
+		// 목록조회
 		model.addAttribute("getBookList", bookService.getBookList1(vo));
-		//타이틀조회
+		// 타이틀조회
 		model.addAttribute("book", bookService.codetitle(vo));
 		return "book/fulllist";
 	}
@@ -349,22 +349,54 @@ public class BookControll {
 		model.addAttribute("book", bookService.codetitle(vo));
 		return "book/freebook";
 	}
-	
-	//검색
-	@RequestMapping("/serch.do")
-	public String serchResult(BookVO vo,Model model) throws Exception {
-		//페이지처리
-		PaginationInfo paginationInfo = new PaginationInfo(); 
-		paginationInfo.setCurrentPageNo(vo.getPageIndex()); 
-		paginationInfo.setRecordCountPerPage(vo.getPageUnit()); 
-		paginationInfo.setPageSize(vo.getPageSize());
-		vo.setFirstIndex(paginationInfo.getFirstRecordIndex()); 
-		vo.setLastIndex(paginationInfo.getLastRecordIndex()); 
-		paginationInfo.setTotalRecordCount(bookService.serchResultCount(vo));
-		model.addAttribute("paginationInfo", paginationInfo);
-		//목록조회
-		model.addAttribute("serch",bookService.serchResult(vo));			
-		return "book/serchpage";
-	}
 
+	// 검색
+	@RequestMapping("/search.do")
+	public String searchResult(BookVO vo, Model model) throws Exception {
+		// 페이지처리
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(vo.getPageIndex());
+		paginationInfo.setRecordCountPerPage(vo.getPageUnit());
+		paginationInfo.setPageSize(vo.getPageSize());
+		vo.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		vo.setLastIndex(paginationInfo.getLastRecordIndex());
+		paginationInfo.setTotalRecordCount(bookService.searchResultCount(vo));
+		model.addAttribute("paginationInfo", paginationInfo);
+		// 목록조회
+		model.addAttribute("search", bookService.searchResult(vo));
+		return "book/searchpage";
+	}
+	
+	//관리자 책조회
+	@RequestMapping("/bookList.do")
+	public String adminBookList(BookVO vo, Model model) throws Exception {
+		// 페이징처리
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(vo.getPageIndex());
+		paginationInfo.setRecordCountPerPage(vo.getPageUnit());
+		paginationInfo.setPageSize(vo.getPageSize());
+		vo.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		vo.setLastIndex(paginationInfo.getLastRecordIndex());
+		paginationInfo.setTotalRecordCount(bookService.getBookList1Count(vo));
+		model.addAttribute("paginationInfo", paginationInfo);
+		// 목록조회
+		model.addAttribute("getBookList1", bookService.getBookList1(vo));
+		return "/popup/admin/bookList";
+	}
+	//관리자 책 검색
+	@RequestMapping("/adminSearch.do")
+	public String adminSearchResult(BookVO vo, Model model) throws Exception {
+		// 페이지처리
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(vo.getPageIndex());
+		paginationInfo.setRecordCountPerPage(vo.getPageUnit());
+		paginationInfo.setPageSize(vo.getPageSize());
+		vo.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		vo.setLastIndex(paginationInfo.getLastRecordIndex());
+		paginationInfo.setTotalRecordCount(bookService.searchResultCount(vo));
+		model.addAttribute("paginationInfo", paginationInfo);
+		// 목록조회
+		model.addAttribute("getBookList1", bookService.searchResult(vo));
+		return "/popup/admin/serchList";
+	}
 }

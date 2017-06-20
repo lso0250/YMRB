@@ -56,7 +56,7 @@ margin-left: 100px;}
 								class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="#"> Y M R B</a>
-						<form action="serch.do" name="frm" method="post">
+						<form action="search.do" name="frm" method="post">
 							<select name="key" name="speed" id="speed">
 								<option <c:if test="${key =='저자' }">selected="selected"</c:if>>저자</option>
 								<option <c:if test="${key =='제목' }">selected="selected"</c:if>>제목</option>

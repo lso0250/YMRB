@@ -58,12 +58,12 @@ public class BookDAOMybatis {
 	      
         return mybatis.selectList("BookDAO.getBookList4", vo);
     }
-	public List<BookVO> serchResult(BookVO vo) {
-		return mybatis.selectList("BookDAO.serchResult", vo);
+	public List<BookVO> searchResult(BookVO vo) {
+		return mybatis.selectList("BookDAO.searchResult", vo);
 	}
 
-    public int serchResultCount(BookVO vo){
-    	return mybatis.selectOne("BookDAO.serchResultCount", vo);
+    public int searchResultCount(BookVO vo){
+    	return mybatis.selectOne("BookDAO.searchResultCount", vo);
     }
     public int getBookList1Count(BookVO vo){
     	return mybatis.selectOne("BookDAO.getBookList1Count", vo);

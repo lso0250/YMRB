@@ -24,13 +24,22 @@
         <selectKey keyProperty="rentNum" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(RENT_NUM), 0) + 1 FROM BUYLIST
 		</selectKey>  
-        INSERT INTO BUYLIST(RENT_NUM, BOOK_NUM, BUY_DATE, BUYRENT, MEM_NUM,
-        				  RENT_START_DATE,RENT_LAST_DATE)  
-        VALUES(#{rentNum}, #{bookNum},sysdate,2,
-        			1,sysdate,sysdate+10)
+        INSERT INTO BUYLIST(RENT_NUM, BOOK_NUM, BUY_DATE, BUYRENT, MEM_NUM)  
+        VALUES(#{rentNum}, #{bookNum},sysdate,2,1)
 	</insert>
-	
-
+	<select id="buylist" resultType="map">
+		SELECT *
+		FROM BOOK b, BUYLIST l
+		WHERE b.BOOK_NUM = l.BOOK_NUM
+		AND l.MEM_NUM = 1
+		AND BUYRENT = 2
+		
+		<if test="key.equals('저자')">
+		</if>
+		<if test="key.equals('제목')">
+			AND BOOK_TITLE like '%${keyword}%'
+		</if>
+	</select>
 </mapper>
 
  

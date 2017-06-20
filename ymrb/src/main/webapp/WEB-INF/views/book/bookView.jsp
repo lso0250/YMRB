@@ -102,7 +102,7 @@ tr:nth-child(2n) .tddd {
 			var param = $("#buyBox").serialize();
 			if (confirm("구매할까요?")) {
 				$.getJSON("buyBox.do", param, function(data) {
-					if (confirm("구매완료 대여목록으로 갈까요?")){
+					if (confirm("구매완료 구매목록으로 갈까요?")){
 						location.href="fantasy.do";
 					}
 					alert("구매가 완료 되었습니다.^^")
