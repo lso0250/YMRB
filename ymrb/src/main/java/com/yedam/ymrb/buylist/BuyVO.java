@@ -2,8 +2,11 @@ package com.yedam.ymrb.buylist;
 
 
 
-public class BuyVO {
+public class BuyVO extends com.yedam.ymrb.book.BookVO{
 
+	/**
+	 * 
+	 */
 	private String rentListDate;
 	private String rentStartDate;
 	private int memNum;
@@ -12,7 +15,6 @@ public class BuyVO {
 	private int bookNum;
 	private int rentNum;
 	private int cartNum;
-	
 	public int getCartNum() {
 		return cartNum;
 	}

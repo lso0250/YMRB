@@ -10,14 +10,20 @@ import org.springframework.stereotype.Repository;
 public class BuyDAOMybatis {
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	
-	public void insertBuy(BuyVO vo) {       
-        mybatis.insert("BuyDAO.insertBuy", vo);
-    }
-	public void insertBuy1(BuyVO vo) { 
-        mybatis.insert("BuyDAO.insertBuy1", vo);
-    }
-	public List<BuyVO> BuyList(BuyVO vo) {      
-    return mybatis.selectList("BuyDAO.BuyList", vo);
-    }
+
+	public void insertBuy(BuyVO vo) {
+		mybatis.insert("BuyDAO.insertBuy", vo);
+	}
+
+	public void insertBuy1(BuyVO vo) {
+		mybatis.insert("BuyDAO.insertBuy1", vo);
+	}
+
+	public List<BuyVO> BuyList(BuyVO vo) {
+		return mybatis.selectList("BuyDAO.BuyList", vo);
+	}
+
+	public int buylistCount(BuyVO vo) {
+		return mybatis.selectOne("BuyDAO.buylistCount", vo);
+	}
 }

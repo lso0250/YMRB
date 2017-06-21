@@ -23,4 +23,9 @@ public class BuyServiceImpl implements BuyService {
 		// TODO Auto-generated method stub
 		return buyDAO.BuyList(vo);
 	}
+	@Override
+	public int buylistCount(BuyVO vo) {
+		// TODO Auto-generated method stub
+		return buyDAO.buylistCount(vo);
+	}
 }

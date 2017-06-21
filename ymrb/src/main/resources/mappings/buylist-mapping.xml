@@ -27,18 +27,30 @@
         INSERT INTO BUYLIST(RENT_NUM, BOOK_NUM, BUY_DATE, BUYRENT, MEM_NUM)  
         VALUES(#{rentNum}, #{bookNum},sysdate,2,1)
 	</insert>
-	<select id="buylist" resultType="map">
-		SELECT *
+	<!--구매몰고  -->
+	<select id="BuyList" resultType="map">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+		SELECT b.BOOK_NUM,b.PARENT_NUM,b.BOOK_TITLE,b.BOOK_WRITER,b.BOOK_PUBLISHER,b.BOOK_PRICE
+		, b.BOOK_RENT, b.BOOK_PUBLISH_DATE, b.BOOK_IMAGE, b.BOOK_ATTACTMENT, b.BOOK_CONTENTS
+		, b.BOOK_AGE_LIMIT, b.UPLOADFILE, b.BOOK_HIT, l.RENT_NUM, l.BUY_DATE, l.MEM_NUM
+		, l.RENT_START_DATE, l.RENT_LAST_DATE
 		FROM BOOK b, BUYLIST l
 		WHERE b.BOOK_NUM = l.BOOK_NUM
-		AND l.MEM_NUM = 1
-		AND BUYRENT = 2
+		AND l.MEM_NUM = ${memNum}
+		AND BUYRENT = ${buyrent}
 		
-		<if test="key.equals('저자')">
-		</if>
-		<if test="key.equals('제목')">
-			AND BOOK_TITLE like '%${keyword}%'
-		</if>
+			<![CDATA[					
+	) A WHERE ROWNUM <= #{lastIndex}
+)WHERE RNUM > #{firstIndex}
+]]>
+	</select>
+		<select id="buylistCount" resultType="int">
+		SELECT count(*)
+		FROM BOOK b, BUYLIST l
+		WHERE b.BOOK_NUM = l.BOOK_NUM
+		AND l.MEM_NUM = ${memNum}
+		AND BUYRENT = ${buyrent}
 	</select>
 </mapper>
 
