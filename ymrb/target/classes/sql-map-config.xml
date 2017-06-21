@@ -33,6 +33,7 @@
 		<mapper resource="mappings/book-mapping.xml" />
 		<mapper resource="mappings/genre-mapping.xml" />
 		<mapper resource="mappings/buylist-mapping.xml" />
+		<mapper resource="mappings/cash-mapping.xml" />
 	</mappers>
 
 </configuration>

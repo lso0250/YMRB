@@ -190,7 +190,7 @@ fieldset {
 
 #contact input[type="text"], #contact input[type="email"], #contact input[type="date"], #contact input[type="tel"], #contact input[type="password"] {
 	border-radius: 5px;
-	width:85%;
+	width:100%;
 	border:1px solid #CCC;
 	background:#FFF;
 	margin:0 0 5px;

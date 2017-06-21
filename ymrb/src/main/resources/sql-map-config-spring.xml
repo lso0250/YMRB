@@ -7,6 +7,8 @@
 
 		<typeAlias alias="book" type="com.yedam.ymrb.book.BookVO" />
 		<typeAlias alias="genre" type="com.yedam.ymrb.genre.GenreVO" />
+		<typeAlias alias="genre2" type="com.yedam.ymrb.genre.Genre2VO" />
+		<typeAlias alias="cash" type="com.yedam.ymrb.cash.CashVO" />
 		<typeAlias alias="buylist" type="com.yedam.ymrb.buylist.BuyVO" />
 		<typeAlias alias="user" type="com.yedam.ymrb.user.UserVO" />
 		<typeAlias alias="cart" type="com.yedam.ymrb.cart.CartVO" />

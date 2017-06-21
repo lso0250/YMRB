@@ -17,28 +17,38 @@
 	
 	<select id="getGenreList2" resultType="map" parameterType="genre">
 	  
-		SELECT  CODE_CONTENTS,CODE_CONTENTS2 FROM GENRE2 WHERE BOOK_NUM=#{bookNum}
+		SELECT  C_NUM,CODE_CONTENTS,CODE_CONTENTS2 FROM GENRE2 WHERE BOOK_NUM=#{bookNum}
 	
 	</select>
-	<insert id="genreInsert" parameterType="genre">
-        <![CDATA[ 
-         
+	<insert id="genreInsert" parameterType="genre2">
+
+         <selectKey keyProperty="cnum" resultType="string" order="BEFORE">
+			select nvl(max(C_NUM),0)+1 from GENRE2
+		</selectKey>  
+		
         INSERT INTO GENRE2(C_NUM,CODE_CONTENTS,BOOK_NUM,CODE_CONTENTS2) 
-        VALUES((select nvl(max(C_NUM),0)+1 from GENRE2),#{codecontents}
+        VALUES(#{cnum},#{codecontents}
         	  ,#{bookNum},#{codecontents2})
-        ]]>
+       
 
 
 	</insert>
-	<update id="updateGenre">
+	
+	
+	<update id="updateGenre"  parameterType="genre2">
         <![CDATA[
         UPDATE GENRE2 SET
              CODE_CONTENTS =	#{codecontents}, 
             CODE_CONTENTS2 = #{codecontents2}
-        WHERE BOOK_NUM = #{bookNum}
+        WHERE C_NUM = #{cnum}
         ]]>
 	</update>
-	
+	<delete id="deleteGenre">
+        <![CDATA[
+        DELETE GENRE2
+        WHERE C_NUM = #{cnum}
+        ]]>
+	</delete>
 </mapper>
 
  

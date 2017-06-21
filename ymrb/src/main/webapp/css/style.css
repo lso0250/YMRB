@@ -64,6 +64,6 @@ h1#logo a { display: block; height: 37px; background: url(images/logo.png) no-re
 .image-box .photo-cover { position: relative;  width: 170px; height: 110px; background: url(images/photo-cover.gif) no-repeat 0 0; margin: 33px 0 0 15px; padding: 3px 0 0 3px; }
 .image-box .photo-name {  height: 32px; border-top: 1px dashed #000; background: url(images/photo-name-bg.gif) no-repeat center 7px; margin-top: 15px; color: #231f19; text-align: center; padding-top: 8px; }
 
-#footer { color: #ccc; }
+#footer { color: #ccc; margin-top: 480px;}
 #footer a { color: #ccc; }
 #footer p.right { padding-right: 46px;}

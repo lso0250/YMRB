@@ -27,7 +27,7 @@
         INSERT INTO BUYLIST(RENT_NUM, BOOK_NUM, BUY_DATE, BUYRENT, MEM_NUM)  
         VALUES(#{rentNum}, #{bookNum},sysdate,2,1)
 	</insert>
-	<!--구매몰고  -->
+	<!--구매목록  -->
 	<select id="BuyList" resultType="map">
 SELECT * FROM (
 	SELECT A.*, ROWNUM RNUM FROM (
@@ -39,7 +39,13 @@ SELECT * FROM (
 		WHERE b.BOOK_NUM = l.BOOK_NUM
 		AND l.MEM_NUM = ${memNum}
 		AND BUYRENT = ${buyrent}
-		
+		<if test="keyword != null and keyword != '' ">
+		AND b.BOOK_TITLE like '%${keyword}%'
+		</if>
+		<if test="keyword != null and keyword != '' ">
+		OR b.BOOK_WRITER like '%${keyword}%'
+		</if>
+
 			<![CDATA[					
 	) A WHERE ROWNUM <= #{lastIndex}
 )WHERE RNUM > #{firstIndex}
@@ -51,6 +57,12 @@ SELECT * FROM (
 		WHERE b.BOOK_NUM = l.BOOK_NUM
 		AND l.MEM_NUM = ${memNum}
 		AND BUYRENT = ${buyrent}
+		<if test="keyword != null and keyword != '' ">
+		AND b.BOOK_TITLE like '%${keyword}%'
+		</if>
+		<if test="keyword != null and keyword != '' ">
+		OR b.BOOK_WRITER like '%${keyword}%'
+		</if>
 	</select>
 </mapper>
 

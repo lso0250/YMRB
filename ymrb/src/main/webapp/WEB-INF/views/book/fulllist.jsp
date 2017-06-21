@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Free CSS template by ChocoTemplates.com</title>
+<title></title>
 </head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/verticalmenu2.css"

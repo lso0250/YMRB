@@ -187,6 +187,18 @@
         WHERE CODE_NUM = TO_NUMBER('${codeContents}','999')  
         ]]>
 	</select>
+	<!-- 만화 전체조회  -->
+	<select id="getcomicList" resultType="map">
+		SELECT *
+		FROM BOOK b, GENRE2 g
+		WHERE b.BOOK_num = g.BOOK_num
+		<if test="codeContents != null and codeContents != '' ">
+			and CODE_CONTENTS2=#{codeContents}
+		</if>
+		and b.BOOK_PRICE = 0
+		OR b.BOOK_RENT = 0
+		order by book_hit desc
+	</select>
 
 	<select id="searchResult" resultMap="bookResult">
 SELECT * FROM (

@@ -62,30 +62,25 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("/findId.do")
-	public ModelAndView findId(UserVO vo){
+	@RequestMapping(value="/findId.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String findId(UserVO vo){
 		UserVO user = userService.findId(vo);
 		String id=null;
 		if(user !=null)
 			id = user.getMem_id();
-		ModelAndView mv = new ModelAndView();
+	
 		if(id != null){
-			
-			mv.addObject("id",id);
-			mv.setViewName("/popup/user/idFinder");
-			return mv;
+			return id;
 		}
 		else{
-			mv.addObject("id","fail");
-			mv.setViewName("/popup/user/idFinder");
-			return mv;
+			return "fail";
 		}
 	}
 	@RequestMapping("/findPw.do")
-	public ModelAndView findPw(UserVO vo){
+	@ResponseBody
+	public boolean findPw(UserVO vo){
 		boolean flag = userService.findPw(vo);
-		ModelAndView mv = new ModelAndView();
-		
 		if(flag){
 			String email = vo.getMem_email();
 			String msg = "";
@@ -101,17 +96,9 @@ public class UserController {
 			vo.setMem_pw(msg);
 			userService.tempPw(vo);
 			SendEmail.Send(email,msg);
-			mv.addObject("flag",flag);
-			mv.setViewName("/popup/user/pwFinder");
-			return mv;
 		}
-		else{
-			mv.addObject("flag",flag);
-			mv.setViewName("/popup/user/pwFinder");
-			return mv;
-		}
+		return flag;
 	}
-	
 	
 	@RequestMapping("/test.do")
 	public String test() {
@@ -128,7 +115,7 @@ public class UserController {
 		//List<Map<String, Object>> list = userService.getUserList(vo);
 		List<UserVO> list = userService.getUserListVO(vo);
 		mv.addObject("list", list);
-		mv.setViewName("/admin/memList");
+		mv.setViewName("/popup/admin/memList");
 		//model.addAttribute("list",list);
 		System.out.println(mv.getModel());
 		return mv;
@@ -138,21 +125,27 @@ public class UserController {
 	
 	
 	//로그인폼
-	@RequestMapping("/login.do")
+	@RequestMapping("/master.do")
 	public String loginForm() {
-		return "/popup/user/login";
+		return "/popup/admin/adminHome";
 	}
 	
-	
-	@RequestMapping("/findIdForm.do")
+	@RequestMapping("/cart1.do")
+	public String nopop() {
+		return "/cart/cart3";
+	}
+	@RequestMapping("/cart.do")
 	public String findId() {
-		return "/popup/user/findId";
+		return "/popup/cart/cart";
 	}
-	@RequestMapping("/findPwForm.do")
-	public String findPw() {
-		return "/popup/user/findPw";
+	@RequestMapping("/cart2.do")
+	public String cart2() {
+		return "/popup/cart/cart2";
 	}
-	
+	@RequestMapping("/cart3.do")
+	public String cart3() {
+		return "/popup/cart/cart3";
+	}
 	
 	@RequestMapping("/updateForm.do")
 	public ModelAndView updateForm(UserVO vo) {
@@ -163,17 +156,19 @@ public class UserController {
 		return mv;
 	}
 	
+	
 	@RequestMapping("/updateAForm.do")
-	public ModelAndView updateAdmin(UserVO vo) {
-		ModelAndView mv = new ModelAndView();
+	@ResponseBody
+	public UserVO updateAdmin(UserVO vo) {
+		
 		UserVO user = userService.getUser(vo);
-		mv.addObject("user", user);
-		mv.setViewName("/popup/admin/memUpdate");
-		return mv;
+		
+		return user ;
 	}
 	
 	//로그인
 	@RequestMapping(value="/login.do", method = RequestMethod.POST )
+	@ResponseBody
 	public String login(/*@ModelAttribute("user") UserVO vo,*/	//커맨드객체
 		@RequestParam String mem_id,
 		@RequestParam(value="mem_pw") String mem_pw,
@@ -184,19 +179,19 @@ public class UserController {
 			UserVO result = userService.login(vo);
 			if ( result != null ) {
 					session.setAttribute("login", result);
-		//페이지이동
-		//return "redirect:/getBoardList.do";
-					model.addAttribute("msg","로그인되었습니다.");
-					//model.addAttribute("url","/getBoardList.do");
-					return "/popup/alert";
-			} else {
-				return "/popup/user/login";
+					if(result.getMem_id().equals("admin")){
+						return "master";
+					}else
+						return "succ";
+					} else {
+				return "fail";
 		}
 	}
 	//로그아웃
 	@RequestMapping("/logout.do")
+	@ResponseBody
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "/popup/alert";
+		return "succ";
 	}	
 }

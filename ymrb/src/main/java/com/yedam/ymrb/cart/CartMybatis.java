@@ -1,5 +1,7 @@
 package com.yedam.ymrb.cart;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,12 +15,15 @@ public class CartMybatis {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertCart(CartVO vo) {
-        System.out.println("===> Mybatis로 insertCart() 기능 처리");
-        mybatis.insert("CartDAO.insertCart", vo);
-        
+        mybatis.insert("CartDAO.insertCart", vo);   
     }
 	public void cartInsert(BuyVO vo) {
         mybatis.insert("CartDAO.cartInsert", vo);
+    }	
+	public List<UserVO> cartList(CartVO vo) {
+        return mybatis.selectList("CartDAO.CartList", vo);       
+	}
+	public void deleteCart(CartVO vo) {
+        mybatis.insert("CartDAO.deleteCart", vo);   
     }
-	
 }

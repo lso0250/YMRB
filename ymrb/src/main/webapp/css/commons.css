@@ -10,6 +10,9 @@ header, footer {
 	clear: left;
 	text-align: center;
 }
+footer{
+	margin-top: 480px;
+}
 
 nav {
 	float: left;

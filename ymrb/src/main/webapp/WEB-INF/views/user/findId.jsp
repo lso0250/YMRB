@@ -146,8 +146,6 @@ fieldset {
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">아이디 찾기</button>
     </fieldset>
   </form>
- 
-  
 </div>
 </body>
 </html>

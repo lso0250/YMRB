@@ -263,66 +263,6 @@ public class BookControll {
 		return "book/storylist";
 	}
 
-	// 경영경제
-	@RequestMapping("/menulist2.do")
-	public String getBookList3(BookVO vo, Model model) throws Exception {
-		model.addAttribute("getBookList2", bookService.getBookList2(vo));
-		model.addAttribute("getBookList3", bookService.getBookList3(vo));
-		model.addAttribute("getBookList4", bookService.getBookList4(vo));
-		model.addAttribute("book", bookService.codetitle(vo));
-		return "book/businesslist";
-	}
-
-	// 어린이청소년
-	@RequestMapping("/menulist3.do")
-	public String getBookList4(BookVO vo, Model model) throws Exception {
-		model.addAttribute("getBookList2", bookService.getBookList2(vo));
-		model.addAttribute("getBookList3", bookService.getBookList3(vo));
-		model.addAttribute("getBookList4", bookService.getBookList4(vo));
-		model.addAttribute("book", bookService.codetitle(vo));
-		return "book/childlist";
-	}
-
-	// 잡지
-	@RequestMapping("/menulist4.do")
-	public String getBookList5(BookVO vo, Model model) throws Exception {
-		model.addAttribute("getBookList2", bookService.getBookList2(vo));
-		model.addAttribute("getBookList3", bookService.getBookList3(vo));
-		model.addAttribute("getBookList4", bookService.getBookList4(vo));
-		model.addAttribute("book", bookService.codetitle(vo));
-		return "book/magazinelist";
-	}
-
-	// 인문사회역사
-	@RequestMapping("/menulist5.do")
-	public String getBookList6(BookVO vo, Model model) throws Exception {
-		model.addAttribute("getBookList2", bookService.getBookList2(vo));
-		model.addAttribute("getBookList3", bookService.getBookList3(vo));
-		model.addAttribute("getBookList4", bookService.getBookList4(vo));
-		model.addAttribute("book", bookService.codetitle(vo));
-		return "book/historylist";
-	}
-
-	// 자기계발
-	@RequestMapping("/menulist6.do")
-	public String getBookList7(BookVO vo, Model model) throws Exception {
-		model.addAttribute("getBookList2", bookService.getBookList2(vo));
-		model.addAttribute("getBookList3", bookService.getBookList3(vo));
-		model.addAttribute("getBookList4", bookService.getBookList4(vo));
-		model.addAttribute("book", bookService.codetitle(vo));
-		return "book/selfImprovementlist";
-	}
-
-	// 여행
-	@RequestMapping("/menulist7.do")
-	public String getBookList8(BookVO vo, Model model) throws Exception {
-		model.addAttribute("getBookList2", bookService.getBookList2(vo));
-		model.addAttribute("getBookList3", bookService.getBookList3(vo));
-		model.addAttribute("getBookList4", bookService.getBookList4(vo));
-		model.addAttribute("book", bookService.codetitle(vo));
-		return "book/travellist";
-	}
-
 	// 분야,장르별 전체목록 조회
 	@RequestMapping("/fulllist.do")
 	public String getFullList(BookVO vo, Model model) throws Exception {

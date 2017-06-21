@@ -72,8 +72,8 @@
 							<p>대여:${alstn2.BOOK_RENT }</p>
 							<p>구매:${alstn2.BOOK_PRICE }</p>
 							<p>
-<a data-toggle="modal" data-target="#modal-testNew" role="button" href="bookView.do?bookNum=${alstn2.BOOK_NUM}">
-<a href="bookview.do?bookNum=${alstn2.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">
+							<a data-toggle="modal" data-target="#modal-testNew" role="button" href="bookView.do?bookNum=${alstn2.BOOK_NUM}">
+							<a href="bookview.do?bookNum=${alstn2.BOOK_NUM }" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show">
 								Buy Now!</a></a> 
 								<a href="#"	class="btn btn-default">More Info</a>
 							</p>
