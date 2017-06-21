@@ -14,8 +14,5 @@ public class webControll {
 	public String reader2(){
 		return "/popup/reader/index2";
 	}
-	@RequestMapping("/mypage.do")
-	public String mypage(){
-		return "mypage/mypage";
-	}
+
 }
