@@ -12,35 +12,35 @@
 
 	<!-- Application Loggers -->
 	<logger name="com.yedam.ymrb">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<logger name="org.springframework.beans">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<logger name="org.springframework.context">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- jdbc 로그설정 -->
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<logger name="jdbc.connection">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="jdbc.sqltiming">
 		<level value="debug" />
 	</logger>
 	<logger name="jdbc.resultsettable">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- Root Logger -->

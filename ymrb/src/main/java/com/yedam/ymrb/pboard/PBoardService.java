@@ -3,10 +3,14 @@ package com.yedam.ymrb.pboard;
 import java.util.List;
 import java.util.Map;
 
+
+
 public interface PBoardService {
 
 	//글등록
 	void insertPBoard(PBoardVO vo);
+	
+	void insertUpload(UploadVO vo);
 	
 	//글수정
 	void updatePBoard(PBoardVO vo);
@@ -19,5 +23,7 @@ public interface PBoardService {
 	
 	//글목록조회
 	List<Map<String, Object>> getPBoardList(PBoardVO vo);
+	List<UploadVO> getUploadFile(UploadVO vo);
+
 	
 }

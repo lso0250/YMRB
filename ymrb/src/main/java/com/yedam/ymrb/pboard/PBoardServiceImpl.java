@@ -1,10 +1,15 @@
 package com.yedam.ymrb.pboard;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+
 
 @Service("pboardService")
 public class PBoardServiceImpl implements PBoardService {
@@ -15,8 +20,11 @@ public class PBoardServiceImpl implements PBoardService {
 
 	public void insertPBoard(PBoardVO vo) {
 		pboardDAO.insertPBoard(vo);
-		System.out.println("등록 게시글번호 : " + vo.getPboard_num());
-		
+	
+	}
+	public void insertUpload(UploadVO vo) {
+		pboardDAO.insertUpload(vo);
+	
 	}
 
 	public void updatePBoard(PBoardVO vo) {
@@ -36,5 +44,7 @@ public class PBoardServiceImpl implements PBoardService {
 	public List<Map<String, Object>> getPBoardList(PBoardVO vo) {
 		return pboardDAO.getPBoardList(vo);
 	}
-
+	public List<UploadVO> getUploadFile(UploadVO vo) {
+	      return pboardDAO.getUploadFile(vo);
+	    }
 }

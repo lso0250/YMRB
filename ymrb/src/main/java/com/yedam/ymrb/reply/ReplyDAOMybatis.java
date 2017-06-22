@@ -18,16 +18,22 @@ public class ReplyDAOMybatis {
         mybatis.insert("ReplyDAO.insertReply", vo);
 	}
 	
-	public void updateReply(ReplyVO vo){
+	/*public void updateReply(ReplyVO vo){
 		System.out.println("===> Mybatis로 updateReply() 기능 처리");
         mybatis.update("ReplyDAO.updateReply", vo);
 	}
-	
+	*/
 	public void deleteReply(ReplyVO vo){
 		System.out.println("===> Mybatis로 deleteReply() 기능 처리");
         mybatis.delete("ReplyDAO.deleteReply", vo);
 	}
 	
+	public ReplyVO getReply(ReplyVO vo){
+		System.out.println("===> Mybatis로 getReply() 기능 처리");
+		return mybatis.selectOne("ReplyDAO.getReply",vo);
+	}
+	
+		
 	public List<Map<String,Object>> getReplyList(ReplyVO vo){
 		System.out.println("===> Mybatis로 getReplyList() 기능 처리");
         return mybatis.selectList("ReplyDAO.getReplyList()", vo);

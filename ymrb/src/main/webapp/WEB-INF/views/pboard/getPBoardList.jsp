@@ -13,10 +13,7 @@
 <script>
 	$(function() {
 		$("#pboardListTable").DataTable({
-/* 			"paging" : false,
-			"ordering" : false,
-			"searching" : false */
-			
+			"order" : [[3,"desc"]]		
 		});
 	});
 </script>
@@ -37,7 +34,7 @@
  				<tr>
  					<td>${pboard.pboard_num }</td>
 					<td><a href="getPBoard.do?pboard_num=${pboard.pboard_num }">${pboard.pboard_title }</a></td>
-					<td>${pboard.mem_num }</td> 
+					<td>${pboard.mem_nic }</td> 
 					<td>${pboard.pboard_date } </td>
 					<td>${pboard.pboard_hits }</td> 
 				</tr> 

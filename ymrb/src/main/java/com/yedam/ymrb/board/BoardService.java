@@ -22,6 +22,4 @@ public interface BoardService {
 	// 글 목록 조회
 	List<Map<String, Object>> getBoardList(BoardVO vo);
 	
-
-	
 }

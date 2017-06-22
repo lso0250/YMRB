@@ -98,39 +98,19 @@ tr:nth-child(2n) .tddd {
 				})}
 		});
 		
-		$("#buy").click(function() {
-			var param = $("#buyBox").serialize();
-			if (confirm("구매할까요?")) {
-				$.getJSON("buyBox.do", param, function(data) {
-					if (confirm("구매완료 구매목록으로 갈까요?")){
-						location.href="fantasy.do";
-					}
-					alert("구매가 완료 되었습니다.^^")
-				})}
-		});
-		
 		$("#cart").click(function() {
 			var param = $("#rentBox").serialize();
 			if (confirm("장바구니에 담을까요??")) {
-				$.getJSON("cartBox.do", param, function(data) {
+				$.getJSON("rentBox.do", param, function(data) {
 					if (confirm("담기완료 장바구니로 갈까요?")){
 						location.href="fantasy.do";
 					}
-					alert("담기가 완료 되었습니다.^^")
-				})}
-		});
-		$("#cart2").click(function() {
-			var param = $("#buyBox").serialize();
-			if (confirm("장바구니에 담을까요??")) {
-				$.getJSON("cartBox.do", param, function(data) {
-					if (confirm("담기완료 장바구니로 갈까요?")){
-						location.href="fantasy.do";
-					}
-					alert("담기가 완료 되었습니다.^^")
+					alert("대여가 완료 되었습니다.^^")
 				})}
 		});
 	})
 </script>
+
 </head>
 <body>
 	<script>
@@ -207,7 +187,7 @@ tr:nth-child(2n) .tddd {
 
 
 
-		<form method="post" name="buyBox" id="buyBox">
+		<form action="buyBox.do" method="post">
 			<div class="pricing-table standard"
 				style="width: 400px; height: 350px;">
 				<span class="table-head"> 구매 </span> <span class="price"> 권당
@@ -222,8 +202,7 @@ tr:nth-child(2n) .tddd {
 
 				</div>
 				<div class="purchase">
-					<input type="button" class="buy" id="buy" value="구입">
-					<input type="button" class="buy" id="cart2" value="장바구니담기">
+					<input type="submit" class="buy" value="구입">
 				</div>
 			</div>
 		</form>
@@ -252,5 +231,6 @@ tr:nth-child(2n) .tddd {
 	<form name="frm" action="TravelControl.do">
 		<input type="hidden" name="bookNum" value="${book.bookNum}">
 	</form>
+<jsp:include page="../reply/getReplyList.jsp"></jsp:include>
 </body>
 </html>

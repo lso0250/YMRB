@@ -8,6 +8,9 @@ public class ReplyVO {
 	private Date reply_date;
 	private int mem_num;
 	private int book_num;
+	private String mem_nic;
+	
+	
 	public int getReply_num() {
 		return reply_num;
 	}
@@ -38,11 +41,18 @@ public class ReplyVO {
 	public void setBook_num(int book_num) {
 		this.book_num = book_num;
 	}
+	public String getMem_nic() {
+		return mem_nic;
+	}
+	public void setMem_nic(String mem_nic) {
+		this.mem_nic = mem_nic;
+	}
 	@Override
 	public String toString() {
 		return "ReplyVO [reply_num=" + reply_num + ", reply_contents="
 				+ reply_contents + ", reply_date=" + reply_date + ", mem_num="
-				+ mem_num + ", book_num=" + book_num + "]";
+				+ mem_num + ", book_num=" + book_num + ", mem_nic=" + mem_nic
+				+ "]";
 	}
 	
 }

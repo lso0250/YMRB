@@ -9,6 +9,7 @@ public class BoardVO {
 	private Date board_date;
 	private int board_hits;
 	private int mem_num;
+	private String mem_nic;
 	
 	
 	public int getBoard_num() {
@@ -46,15 +47,19 @@ public class BoardVO {
 	}
 	public void setMem_num(int mem_num) {
 		this.mem_num = mem_num;
+	}	
+	public String getMem_nic() {
+		return mem_nic;
+	}
+	public void setMem_nic(String mem_nic) {
+		this.mem_nic = mem_nic;
 	}
 	@Override
 	public String toString() {
 		return "BoardVO [board_num=" + board_num + ", board_title="
 				+ board_title + ", board_contents=" + board_contents
 				+ ", board_date=" + board_date + ", board_hits=" + board_hits
-				+ ", mem_num=" + mem_num + "]";
+				+ ", mem_num=" + mem_num + ", mem_nic=" + mem_nic + "]";
 	}
 	
-	
-
 }

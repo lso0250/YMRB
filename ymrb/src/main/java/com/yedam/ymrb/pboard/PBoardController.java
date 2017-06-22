@@ -34,10 +34,11 @@ public class PBoardController {
 	
 	//단건조회
 	@RequestMapping("/getPBoard.do")
-	public String getPBoard(PBoardVO vo, Model model){
+	public String getPBoard(PBoardVO vo, Model model, UploadVO upload){
 		System.out.println(vo);
 		
 		model.addAttribute("pboard",pboardService.getPBoard(vo));
+		model.addAttribute("upload",pboardService.getUploadFile(upload));
 		return "pboard/getPBoard";
 	}
 	
@@ -58,16 +59,36 @@ public class PBoardController {
 	*/
 	//등록
 	@RequestMapping(value="/pboard/pboardTest.do", method=RequestMethod.POST) 
-	public String boardTest(PBoardVO vo) 
+	public String boardTest(PBoardVO vo, UploadVO upload, HttpServletRequest request) 
 			throws IllegalStateException, IOException {  //command 객체
-		MultipartFile file = vo.getUploadFile();
-		File saveFile = new File("D:/egov/workspace/ymrb/src/main/webapp/pboardimg/" + file.getOriginalFilename());
-		file.transferTo(saveFile);
-		vo.setAttachFilename(file.getOriginalFilename());
 		pboardService.insertPBoard(vo);
+		
+		MultipartFile[] files = vo.getUploadFile();
+		upload.setPboard_num(vo.getPboard_num());
+		String path = request.getSession().getServletContext().getRealPath("/image");
+		System.out.println(path);
+		for(int i=0;i<files.length;i++){
+			MultipartFile file = files[i];
+			File saveFile = new File(path +"/"+ file.getOriginalFilename());
+			try {
+				file.transferTo(saveFile);
+				System.out.println(file.getOriginalFilename());
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block  
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			upload.setFile_name(file.getOriginalFilename());
+			
+			pboardService.insertUpload(upload);
+		}
 		return "redirect:/getPBoardList.do";
-	}
 	
+	}
 	//등록폼
 	@RequestMapping("/pboardInsert.do")
 	public String pboardInsertForm() {

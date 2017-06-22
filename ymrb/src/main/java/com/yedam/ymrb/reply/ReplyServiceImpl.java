@@ -19,14 +19,18 @@ public class ReplyServiceImpl implements ReplyService {
 		System.out.println("등록 댓글번호 : " + vo.getReply_num());		
 	}
 
-	public void updateReply(ReplyVO vo) {
+/*	public void updateReply(ReplyVO vo) {
 		// TODO Auto-generated method stub
 		replyDAO.updateReply(vo);
-	}
+	}*/
 
 	public void deleteReply(ReplyVO vo) {
 		// TODO Auto-generated method stub
 		replyDAO.deleteReply(vo);
+	}
+	
+	public ReplyVO getReply(ReplyVO vo){
+		return replyDAO.getReply(vo);
 	}
 
 	public List<Map<String, Object>> getReplyList(ReplyVO vo) {

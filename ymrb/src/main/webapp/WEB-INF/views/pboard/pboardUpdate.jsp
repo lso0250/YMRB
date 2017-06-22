@@ -10,8 +10,8 @@
 <form action="pboardUpdate.do" method="post">
 	<input type="hidden" name="pboard_num" value="${pboard.pboard_num }"/>
 	제목<input type="text" name="pboard_title"  value="${pboard.pboard_title}"><br/>
-	내용<textarea name="pboard_contents" cols="50" rows="5">${pboard.pboard_contents}</textarea>
-	<input type="submit" value="저장">
+	　　<textarea name="pboard_contents" cols="100" rows="20">${pboard.pboard_contents}</textarea><br>
+	　　<input type="submit" value="저장">
 </form> 
 </body>
 </html>

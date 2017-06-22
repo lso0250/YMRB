@@ -16,8 +16,9 @@ public class PBoardVO {
 	private String pboard_contents;
 	private Date pboard_date;
 	private int pboard_hits;
+	private String mem_nic;
 	private int mem_num;	
-	@XmlTransient private MultipartFile uploadFile;
+	@XmlTransient private MultipartFile[] uploadFile;
 	@XmlTransient private String attachFilename;
 	
 	public int getPboard_num() {
@@ -56,10 +57,10 @@ public class PBoardVO {
 	public void setMem_num(int mem_num) {
 		this.mem_num = mem_num;
 	}
-	public MultipartFile getUploadFile() {
+	public MultipartFile[] getUploadFile() {
 		return uploadFile;
 	}
-	public void setUploadFile(MultipartFile uploadFile) {
+	public void setUploadFile(MultipartFile[] uploadFile) {
 		this.uploadFile = uploadFile;
 	}
 	public String getAttachFilename() {
@@ -68,11 +69,19 @@ public class PBoardVO {
 	public void setAttachFilename(String attachFilename) {
 		this.attachFilename = attachFilename;
 	}
+	public String getMem_nic() {
+		return mem_nic;
+	}
+	public void setMem_nic(String mem_nic) {
+		this.mem_nic = mem_nic;
+	}
 	@Override
 	public String toString() {
 		return "PBoardVO [pboard_num=" + pboard_num + ", pboard_title="
 				+ pboard_title + ", pboard_contents=" + pboard_contents
 				+ ", pboard_date=" + pboard_date + ", pboard_hits="
-				+ pboard_hits + ", mem_num=" + mem_num + "]";
+				+ pboard_hits + ", mem_nic=" + mem_nic + ", mem_num=" + mem_num
+				+ "]";
 	}
+	
 }

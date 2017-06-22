@@ -10,8 +10,8 @@
 <form action="boardUpdate.do" method="post">
 	<input type="hidden" name="board_num" value="${board.board_num }"/>
 	力格<input type="text" name="board_title"  value="${board.board_title}"><br/>
-	郴侩<textarea name="board_contents" cols="50" rows="5">${board.board_contents}</textarea>
-	<input type="submit" value="历厘">
+	　　<textarea name="board_contents" cols="100" rows="20">${board.board_contents}</textarea><br>
+	　　<input type="submit" value="历厘">
 </form> 
 </body>
 </html>

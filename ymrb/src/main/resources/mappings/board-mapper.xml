@@ -11,6 +11,7 @@
 		<id property="board_num" column="BOARD_NUM" />
 		<result property="board_title" column="BOARD_TITLE" />
 		<result property="mem_num" column="MEM_NUM" />
+		<result property="mem_nic" column="MEM_NIC" />
 		<result property="board_contents" column="BOARD_CONTENTS" />
 		<result property="board_date" column="BOARD_DATE" />
 		<result property="board_hits" column="BOARD_HITS" />
@@ -62,21 +63,27 @@
 	</delete>
 
 	<select id="getBoard" resultType="board">
-        <![CDATA[
-        SELECT * 
-        FROM BOARD
-        WHERE board_num = #{board_num}
+        <![CDATA[SELECT	BOARD_TITLE
+        ,BOARD_NUM
+        ,BOARD_CONTENTS
+        ,M.MEM_NIC
+        ,TO_CHAR(BOARD_DATE,'YYYY-MM-DD') AS BOARD_DATE
+        ,BOARD_HITS 
+        FROM BOARD B, MEMBER M
+        WHERE BOARD_NUM = #{board_num}
+        AND B.MEM_NUM = M.MEM_NUM
         ]]>
 	</select>
 	
 	<select id="getBoardList" resultType="map">
         <![CDATA[
-        SELECT  BOARD_NUM 						AS "boardNum"
-		,BOARD_TITLE							AS "boardTitle"
-		,MEM_NUM								AS "memNum"
+        SELECT  BOARD_NUM						AS "boardNum" 						
+		,BOARD_TITLE							AS "boardTitle"		
+		,M.MEM_NIC								AS "memNic"
 		,TO_CHAR(BOARD_DATE, 'YYYY-MM-DD')		AS "boardDate"
 		,BOARD_HITS								AS "boardHits"
-        FROM BOARD
+        FROM BOARD B, MEMBER M
+        WHERE B.MEM_NUM = M.MEM_NUM
         ORDER BY BOARD_NUM DESC
         ]]>
 	</select>
@@ -85,6 +92,7 @@
 		<id property="pboard_num" column="PBOARD_NUM" />
 		<result property="pboard_title" column="PBOARD_TITLE" />
 		<result property="mem_num" column="MEM_NUM" />
+		<result property="mem_nic" column="MEM_NIC" />
 		<result property="pboard_contents" column="PBOARD_CONTENTS" />
 		<result property="pboard_date" column="PBOARD_DATE" />
 		<result property="pboard_hits" column="PBOARD_HITS" />
@@ -101,9 +109,6 @@
 		,PBOARD_CONTENTS
 		,PBOARD_DATE
 		,PBOARD_HITS
-		<if test="attachFilename != null and attachFilename != '' ">
-        ,ATTACH_FILENAME
-        </if>
 		)
 		VALUES(#{pboard_num}
 		, #{pboard_title}
@@ -111,9 +116,6 @@
 		, #{pboard_contents}
 		, SYSDATE
 		, 0
-		<if test="attachFilename != null and attachFilename != '' ">
-        , #{attachFilename}
-        </if>
 		)
 
 	</insert>
@@ -143,10 +145,14 @@
 	</delete>
 
 	<select id="getPBoard" resultMap="pboardResult">
-        <![CDATA[
-        SELECT *
-        FROM PBOARD
+        <![CDATA[SELECT	PBOARD_TITLE
+        ,PBOARD_CONTENTS
+        ,M.MEM_NIC
+        ,TO_CHAR(PBOARD_DATE,'YYYY-MM-DD') AS PBOARD_DATE
+        ,PBOARD_HITS
+        FROM PBOARD P, MEMBER M
         WHERE PBOARD_NUM = #{pboard_num}
+        AND P.MEM_NUM = M.MEM_NUM
         ]]>
        
 	</select>
@@ -155,10 +161,11 @@
         <![CDATA[
         SELECT  PBOARD_NUM 						
 		,PBOARD_TITLE							
-		,MEM_NUM								
-		,TO_CHAR(PBOARD_DATE, 'YYYY-MM-DD')		
+		,M.MEM_NIC							
+		,TO_CHAR(PBOARD_DATE, 'YYYY-MM-DD')		AS PBOARD_DATE
 		,PBOARD_HITS							
-        FROM PBOARD
+        FROM PBOARD P, MEMBER M
+        WHERE P.MEM_NUM = M.MEM_NUM
         ORDER BY PBOARD_NUM DESC
         ]]>
 	</select>

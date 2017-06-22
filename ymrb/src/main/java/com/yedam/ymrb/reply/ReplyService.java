@@ -7,11 +7,14 @@ public interface ReplyService {
 	//insert reply
 	void insertReply(ReplyVO vo);
 	
-	//update reply
+/*	//update reply
 	void updateReply(ReplyVO vo);
-
+*/
 	//delete reply
 	void deleteReply(ReplyVO vo);
+	
+	//get reply
+	ReplyVO getReply(ReplyVO vo);
 	
 	//reply list
 	List<Map<String, Object>> getReplyList(ReplyVO vo);

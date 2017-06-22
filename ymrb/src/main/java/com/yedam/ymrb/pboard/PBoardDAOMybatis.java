@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class PBoardDAOMybatis {
 
@@ -41,5 +42,15 @@ public class PBoardDAOMybatis {
         System.out.println("===> Mybatis로 getPBoardList() 기능 처리");
         return mybatis.selectList("BoardDAO.getPBoardList", vo);
     }	
+    //업로드
+	public void insertUpload(UploadVO vo){
+		System.out.println("===> Mybatis로 insertUpload() 기능 처리");
+		mybatis.insert("upload.insertUpload", vo);
+	}
 	
+	public List<UploadVO> getUploadFile(UploadVO vo) {
+        
+        return mybatis.selectList("upload.getUploadFile", vo);
+    }	
+
 }

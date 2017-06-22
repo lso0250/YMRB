@@ -15,6 +15,7 @@
 		<typeAlias alias="board" type="com.yedam.ymrb.board.BoardVO" />
 		<typeAlias alias="pboard" type="com.yedam.ymrb.pboard.PBoardVO" />
 		<typeAlias alias="reply" type="com.yedam.ymrb.reply.ReplyVO" />
+		<typeAlias alias="upload" type="com.yedam.ymrb.pboard.UploadVO"/>
 
 	</typeAliases>
 

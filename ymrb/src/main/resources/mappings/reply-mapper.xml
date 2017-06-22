@@ -11,10 +11,66 @@
 		<id property="reply_num" column="REPLY_NUM" />
 		<result property="reply_contents" column="REPLY_CONTENTS" />
 		<result property="mem_num" column="MEM_NUM" />
-	
+		<result property="mem_nic" column="MEM_NIC" />
+		<result property="book_num" column="BOOK_NUM" />
+		<result property="reply_date" column="REPLY_DATE" />
 	</resultMap>
-
+	<insert id="insertReply">
+		<selectKey keyProperty="reply_num" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(REPLY_NUM), 0) +1 FROM REPLY
+		</selectKey>
+		INSERT INTO REPLY(REPLY_NUM
+		,REPLY_CONTENTS
+		,MEM_NUM
+		,BOOK_NUM
+		,REPLY_DATE
+		)
+		VALUES(#{reply_num}
+		,#{reply_contents}
+		,#{mem_num}
+		,#{book_num}
+		,SYSDATE		
+		)
+	</insert>
 	
+	<update id="updateReply" parameterType="reply">
+		UPDATE REPLY
+		SET
+			REPLY_CONTENTS = #{reply_contents}
+		WHERE REPLY_NUM = #{reply_num}
 	
+	</update>
+	
+	<delete id="deleteReply">
+		<![CDATA[
+        	DELETE REPLY
+        	WHERE REPLY_NUM = #{reply_num}
+        ]]>
+	
+	</delete>
+	
+	<select id="getReply" resultType="reply">
+		<![CDATA[
+		SELECT REPLY_NUM
+				,REPLY_CONTENTS
+				,M.MEM_NIC
+				,TO_CHAR(REPLY_DATE, 'YYYY-MM-DD') AS REPLY_DATE
+		FROM REPLY R, MEMBER M
+		WHERE REPLY_NUM = #{reply_num}
+		AND R.MEM_NUM = M.MEM_NUM
+		]]>
+	</select>
+	
+	<select id="getReplyList" resultType="map">
+		<![CDATA[
+			SELECT REPLY_NUM
+			,REPLY_CONTENTS
+			,M.MEM_NIC
+			,TO_CHAR(REPLY_DATE, 'YYYY-MM-DD') AS REPLY_DATE
+			FROM REPLY R, MEMBER M
+			WHERE R.MEM_NUM = M.MEM_NUM
+			ORDER BY REPLY_NUM DESC
+		]]>
+	</select>
 	
 	</mapper>
