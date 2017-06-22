@@ -33,4 +33,7 @@ public class GenreServiceImpl implements GenreService{
     public void updateGenre(Genre2VO vo) {
     	genreDAO.updateGenre(vo);
     }
+    public void deleteGenre(Genre2VO vo) {
+    	genreDAO.deleteGenre(vo);
+    }
 }

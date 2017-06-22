@@ -212,7 +212,7 @@ body {
 			</div>
 			<!-- end social-links -->
 		</div>
-		<!-- end user box -->${getBookList2[0].BOOK_CONTENTS}
+		<!-- end user box -->
 		<c:forEach var="alstn2" items="${getBookList2}" begin="0" end="9"
 			step="1">
 			<!-- image box -->

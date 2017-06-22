@@ -29,142 +29,128 @@ public class BookControll {
 	@Autowired
 	private BookService bookService;
 
-	// 등록폼
-	@RequestMapping("/bookInsert.do")
-	public String bookinsert(Model model) {
+	//등록폼
+		@RequestMapping("/bookInsert.do")
+		public String bookinsert(Model model){
+			
+			GenreVO genrevo = new GenreVO();
+			genrevo.setCodelist("분야");
+			model.addAttribute("genre1", genreService.getGenreList(genrevo));
 
-		GenreVO genrevo = new GenreVO();
-		genrevo.setCodelist("분야");
-		model.addAttribute("genre1", genreService.getGenreList(genrevo));
-
-		return "/book/bookinsert";
-	}
-
-	// 등록
-	@RequestMapping(value = "/bookInsert.do", method = RequestMethod.POST)
-	public String insertBook(BookVO vo, Genre2VO vo2) // command 객체
-			throws IllegalStateException, IOException {
-		MultipartFile file = vo.getUploadFile();
-		File saveFile = new File(
-				"D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",
-				file.getOriginalFilename());
-		file.transferTo(saveFile); // 서버에 파일 저장
-		vo.setBookAttactment(file.getOriginalFilename());
-		file = vo.getImageFile();
-		saveFile = new File(
-				"D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/image/",
-				file.getOriginalFilename());
-		file.transferTo(saveFile); // 서버에 파일 저장
-		vo.setBookImage(file.getOriginalFilename());
-		bookService.insertBook(vo); // 부모책 추가
-		vo.setParentNum(vo.getBookNum());
-
-		// 북넘버 받아서 장르 분야 추가
-		String[] list = vo.getCodecontent();
-		String[] list2 = vo.getCodecontent2();
-
-		for (int i = 0; i < list.length; i++) {
-			vo2.setBookNum(vo.getBookNum());
-			vo2.setCodecontents(list[i]);
-			vo2.setCodecontents2(list2[i]);
-			genreService.genreInsert(vo2);
+			return "/book/bookinsert";
 		}
-
-		String[] serise1 = vo.getTitleserise();
-		String[] serise2 = vo.getDateserise();
-		MultipartFile[] serise3 = vo.getFileserise();
-		if (serise1.length >= 1) {
-			vo.setParentNum(vo.getBookNum());
-			for (int i = 0; i < serise1.length; i++) {
+		//등록
+		@RequestMapping(value="/bookInsert.do" , method=RequestMethod.POST) 
+		public String  insertBook(BookVO vo, Genre2VO vo2)   //command 객체
+			throws IllegalStateException, IOException {  
+			MultipartFile file = vo.getUploadFile();
+			File saveFile = new File("D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",file.getOriginalFilename());
+			file.transferTo(saveFile);  //서버에 파일 저장
+			vo.setBookAttactment(file.getOriginalFilename());
+			file = vo.getImageFile();
+			saveFile = new File("D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/image/",file.getOriginalFilename());
+			file.transferTo(saveFile);  //서버에 파일 저장
+			vo.setBookImage(file.getOriginalFilename());	
+			 bookService.insertBook(vo); //부모책 추가
+			 vo.setParentNum(vo.getBookNum());
+			
+			 //북넘버 받아서 장르 분야 추가 
+			String[] list = vo.getCodecontent();
+			String[] list2 = vo.getCodecontent2();
+			
+			for(int i=0; i<list.length; i++){	
+				vo2.setBookNum(vo.getBookNum());
+				vo2.setCodecontents(list[i]);
+				vo2.setCodecontents2(list2[i]);  
+				genreService.genreInsert(vo2);
+			}
+		
+			String[] serise1 = vo.getTitleserise();
+			String[] serise2 = vo.getDateserise();
+			MultipartFile[] serise3 = vo.getFileserise();
+			if(serise1.length >= 1){
+				vo.setParentNum(vo.getBookNum());	
+			for(int i=0; i<serise1.length; i++){	
 				file = serise3[i];
-				saveFile = new File(
-						"D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",
-						file.getOriginalFilename());
-				file.transferTo(saveFile); // 서버에 파일 저장
-				vo.setBookAttactment(file.getOriginalFilename());
+				saveFile = new File("D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",file.getOriginalFilename());
+				file.transferTo(saveFile);  //서버에 파일 저장
+				vo.setBookAttactment(file.getOriginalFilename());		
 				vo.setBookTitle(serise1[i]);
 				vo.setBookPublishDate(serise2[i]);
 				bookService.insertBook(vo);
 			}
 		}
-		// 자식 책 추가
-		return "redirect:/menu.do";
-	}
+			 //자식 책 추가
+			return "redirect:/menu.do";
+		}	
+		//수정 폼
+		@RequestMapping("/bookUpdateForm.do")   //get 
+		public String  bookUpdateForm(BookVO vo,
+				Model model,GenreVO genrevo,Genre2VO genre2vo) {
+			
+			genrevo.setCodelist("분야");
+			model.addAttribute("genre1", genreService.getGenreList(genrevo));
+			model.addAttribute("genre2", genreService.getGenreList2(genre2vo));
+			model.addAttribute("book", bookService.bookView(vo));
+			model.addAttribute("serise", bookService.getSeriseList(vo));
+			
+			return "book/bookUpdate";
+		}	
 
-	// 수정 폼
-	@RequestMapping("/bookUpdateForm.do")
-	// get
-	public String bookUpdateForm(BookVO vo, Model model, GenreVO genrevo,
-			Genre2VO genre2vo) {
-
-		genrevo.setCodelist("분야");
-		model.addAttribute("genre1", genreService.getGenreList(genrevo));
-		model.addAttribute("genre2", genreService.getGenreList2(genre2vo));
-		model.addAttribute("book", bookService.bookView(vo));
-		model.addAttribute("serise", bookService.getSeriseList(vo));
-
-		return "book/bookUpdate";
-	}
-
-	// 수정
-	@RequestMapping("/bookUpdate.do")
-	// get
-	public String bookUpdate(@ModelAttribute("book") BookVO vo, Genre2VO vo2)
-			throws IllegalStateException, IOException {
-		// 부모책 수정
-		MultipartFile file1 = vo.getUploadFile();
-		File saveFile = new File(
-				"D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",
-				file1.getOriginalFilename());
-		vo.setBookAttactment(file1.getOriginalFilename());
-		file1 = vo.getImageFile();
-		saveFile = new File(
-				"D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/image/",
-				file1.getOriginalFilename());
-		vo.setBookImage(file1.getOriginalFilename());
-		bookService.updateBook1(vo);
-
-		// 장르 분야 수정
-		vo.setParentNum(vo.getBookNum());
-
-		// 북넘버 받아서 장르 분야 추가
-		String[] list = vo.getCodecontent();
-		String[] list2 = vo.getCodecontent2();
-		for (int i = 0; i < list.length; i++) {
-			vo2.setBookNum(vo.getBookNum());
-			vo2.setCodecontents(list[i]);
-			vo2.setCodecontents2(list2[i]);
-			genreService.updateGenre(vo2);
-		}
-
-		// 시리즈 수정
-		String[] serise1 = vo.getTitleserise();
-		String[] serise2 = vo.getDateserise();
-		MultipartFile[] serise3 = vo.getFileserise();
-		if (serise1.length >= 1) {
+		
+		
+		@RequestMapping("/bookUpdate.do")   //get 
+		public String  bookUpdate(@ModelAttribute("book") BookVO vo,
+								Genre2VO vo2) throws IllegalStateException, IOException 
+		{
+			//부모책 수정
+			MultipartFile file1 = vo.getUploadFile();
+			File saveFile = new File("D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",file1.getOriginalFilename());
+			vo.setBookAttactment(file1.getOriginalFilename());
+			file1 = vo.getImageFile();
+			saveFile = new File("D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/image/",file1.getOriginalFilename());
+			vo.setBookImage(file1.getOriginalFilename());
+			bookService.updateBook1(vo);
+			
+			//장르 분야 수정
 			vo.setParentNum(vo.getBookNum());
-			for (int i = 0; i < serise1.length; i++) {
+			
+			//북넘버 받아서 장르 분야 추가 	 
+			String[] list = vo.getCodecontent();
+			String[] list2 = vo.getCodecontent2();
+			for(int i=0; i<list.length; i++){		
+				vo2.setBookNum(vo.getBookNum());
+				vo2.setCodecontents(list[i]);
+				vo2.setCodecontents2(list2[i]);  
+				genreService.updateGenre(vo2);
+			}
+			
+			//시리즈 수정
+			String[] serise1 = vo.getTitleserise();
+			String[] serise2 = vo.getDateserise();
+			MultipartFile[] serise3 = vo.getFileserise();
+			if(serise1.length >= 1){
+				vo.setParentNum(vo.getBookNum());	
+			for(int i=0; i<serise1.length; i++){	
 				file1 = serise3[i];
-				saveFile = new File(
-						"D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",
-						file1.getOriginalFilename());
+				saveFile = new File("D:/eGovFrameDev-3.5.1-64bit/workspace/ymrb3/src/main/webapp/upload/",file1.getOriginalFilename());
 				vo.setBookAttactment(file1.getOriginalFilename());
 				vo.setBookTitle(serise1[i]);
-				vo.setBookPublishDate(serise2[i]);
+				vo.setBookPublishDate(serise2[i]);		
 				bookService.updateBook2(vo);
 			}
+		}	
+			return "book/bookView";
+		}	
+		
+		//도서상세보기 조회
+		@RequestMapping("/bookview.do")
+		public String bookView(Model model, BookVO vo){
+			bookService.updateBook(vo);
+			model.addAttribute("book", bookService.bookView(vo));
+			model.addAttribute("serise", bookService.getSeriseList(vo));	
+			return "/popup/book/bookView";
 		}
-		return "book/bookView";
-	}
-
-	// 도서상세보기 조회
-	@RequestMapping("/bookview.do")
-	public String bookView(Model model, BookVO vo) {
-		bookService.updateBook(vo);
-		model.addAttribute("book", bookService.bookView(vo));
-		model.addAttribute("serise", bookService.getSeriseList(vo));
-		return "/popup/book/bookView";
-	}
 
 	// 대여 클릭시
 	@RequestMapping("/rentBox.do")
