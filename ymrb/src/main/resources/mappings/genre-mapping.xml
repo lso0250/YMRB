@@ -29,12 +29,8 @@
         INSERT INTO GENRE2(C_NUM,CODE_CONTENTS,BOOK_NUM,CODE_CONTENTS2) 
         VALUES(#{cnum},#{codecontents}
         	  ,#{bookNum},#{codecontents2})
-       
-
-
 	</insert>
-	
-	
+
 	<update id="updateGenre"  parameterType="genre2">
         <![CDATA[
         UPDATE GENRE2 SET

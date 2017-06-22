@@ -131,7 +131,14 @@
         WHERE PARENT_NUM = #{bookNum}
         ]]>
 	</update>
-
+	<!--도서삭제  -->
+	<delete id="deleteBook">
+        <![CDATA[
+        DELETE BOOK
+        WHERE book_num = #{bookNum}
+        or parent_num = #{bookNum}
+        ]]>
+	</delete>
 	<!--??  -->
 	<select id="getBookList2" resultType="map">
 		SELECT *

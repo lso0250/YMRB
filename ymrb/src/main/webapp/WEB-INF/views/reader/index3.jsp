@@ -26,7 +26,6 @@
                 EPUBJS.filePath = "js/libs/";
                 EPUBJS.cssPath = window.location.href.replace(window.location.hash, '').replace('index.html', '') + "css/";
                 // fileStorage.filePath = EPUBJS.filePath;
-
                 window.reader = ePubReader("./moby-dick.epub");
               }
             };

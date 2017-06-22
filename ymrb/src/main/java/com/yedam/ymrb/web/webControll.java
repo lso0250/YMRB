@@ -10,9 +10,4 @@ public class webControll {
 	public String reader(){
 		return "/popup/reader/index3";
 	}
-	@RequestMapping("/reader2/")
-	public String reader2(){
-		return "/popup/reader/index2";
-	}
-
 }

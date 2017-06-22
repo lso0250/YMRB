@@ -12,7 +12,8 @@ public interface BookService {
 
 	//글 등록
 	void insertBook(BookVO vo);
-	
+	//자식 삭제
+	void deleteBook(BookVO vo);
 	//조회수
 	void updateBook(BookVO vo);
 	void updateBook1(BookVO vo);

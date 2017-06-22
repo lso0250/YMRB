@@ -36,4 +36,9 @@ public class GenreDAOMybatis {
         
         mybatis.update("GenreDAO.updateGenre", vo);
     }
+	//삭제
+	public void deleteGenre(Genre2VO vo) {
+        
+        mybatis.delete("GenreDAO.deleteGenre", vo);
+    }
 }
