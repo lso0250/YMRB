@@ -236,6 +236,7 @@ function findPwResult(){
 							<li><a href="fantasy.do">&nbsp;&nbsp;&nbsp;판타지 </a></li>
 							<li><a href="comic.do"> &nbsp;&nbsp;&nbsp;만화</a></li>
 							<li><a href="getBoardList.do"> &nbsp;&nbsp;커뮤니티</a></li>
+							<li><a href="getPBoardList.do"> &nbsp;&nbsp;연재</a></li>
 							<c:if test="${login.mem_id == null }">
 								<li><a  href="#" onclick="loginForm();" > &nbsp;&nbsp;로그인 </a></li>						
 								<li><a href="userInsert.do" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
